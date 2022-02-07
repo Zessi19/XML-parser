@@ -1,70 +1,58 @@
 package packXMLparser;
 
-import javax.swing.*;
-import javax.swing.text.Document;
-import javax.swing.text.html.HTMLEditorKit;
-import java.awt.BorderLayout;
+import java.io.File;
+import javax.swing.JPanel;
+import javax.swing.JEditorPane;
+import javax.swing.JScrollPane;
+import javax.swing.JOptionPane;
+
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.LayoutManager;
 
 public class HTMLpanel {
+	private JPanel mainJPanel;
 	private JEditorPane jEditorPane;
 	private JScrollPane jScrollPane;
-	private HTMLEditorKit kit;
-	private Document doc;
+	private LayoutManager layout;
 	
-	String test = "<html>\n"
-            + "<body>\n"
-            + "<h1>Welcome</h1>\n"
-            + "<h2>This is an H2 header</h2>\n"
-            + "<p>This is some sample text</p>\n"
-            + "<p><a href=\"http://devdaily.com/blog/\">devdaily blog</a></p>\n"
-            + "</body>\n";
-	
-	public HTMLpanel(JFrame frame, String filename) {
-		this.jEditorPane = new JEditorPane();
-		
+	public HTMLpanel(String filename, int xPixels, int yPixels) {
+		// Set-up Main Panel
+		this.mainJPanel = new JPanel();
+	    this.layout = new FlowLayout();  
+	    this.mainJPanel.setLayout(layout);
+	    
+	    this.jEditorPane = new JEditorPane();
 		this.jEditorPane.setEditable(false);
-		this.jScrollPane = new JScrollPane(this.jEditorPane);
 		
-		this.kit = new HTMLEditorKit();
-        jEditorPane.setEditorKit(kit);
+		// Read HTML-file
+        try {
+        	File htmlFile = new File("src/appData/" + filename);
+        	this.jEditorPane.setPage(htmlFile.toURI().toURL());
+        	
+        } catch (Exception e) {
+        	e.printStackTrace();
+        	JOptionPane.showMessageDialog(null, "Cannot open a file: " + filename, "Infobox", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        // Add attachments to Main Panel
+        this.jScrollPane = new JScrollPane(jEditorPane);
+        this.jScrollPane.setPreferredSize(new Dimension(xPixels-50, yPixels-75));
         
-        this.doc = kit.createDefaultDocument();
-        jEditorPane.setDocument(doc);
-        jEditorPane.setText(test);
-        
+        this.mainJPanel.add(jScrollPane);
+        this.hide();
 	}
 	
-	public JScrollPane getScrollPane() {
-		return this.jScrollPane;
+	public JPanel getJPanel() {
+		return this.mainJPanel;
 	}
-        
-        
-        
-
-        
-        
-        //frame.getContentPane().add(this.jScrollPane, BorderLayout.CENTER);
 	
+	public void show() {
+		this.mainJPanel.setVisible(true);
+	}
 	
-	// HTML panel
-			/*JEditorPane editorPane = new JEditorPane();
-			editorPane.setEditable(false);
-			
-			this.add(editorPane);
-			
-			HTMLEditorKit kit = new HTMLEditorKit();
-			editorPane.setEditorKit(kit);
-			
-			JScrollPane scrollPane = new JScrollPane(editorPane);
-			
-			Document doc = kit.createDefaultDocument();
-			editorPane.setDocument(doc);
-			editorPane.setText("<strong>This text is important!</strong>");
-
-			
-			editorPane.setVisible(true);
-			*/
+	public void hide() {
+		this.mainJPanel.setVisible(false);
+	}
 	
-	
-
 }
