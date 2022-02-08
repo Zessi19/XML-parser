@@ -13,7 +13,7 @@ Käynnistettäessä ohjelma avaa valittujen tiedostojen perusnäkymän (aluksi t
 
 Help valikon kautta käyttäjälle aukeaa kaksi näkymää: "User Guide" ja "Keybinds". User Guide vaihtaa näytettäväksi appData kansion guide.html tiedoston, jossa on esitetty ohjelman tiivistetyt käyttöohjeet. Vastaavasti Keybinds vaihtaa näytettäväksi saman kansion keybinds.html tiedoston, jossa näytetään ohjelma näppäimistön "shortcutit".
 
-Kun käyttäjä valtsee levyltä tiedoston, tiedosto ilmestyy tiedostojen perusnäkymään. Jokaisen tiedoston vieressä on "radio button" ja tiedostoa klikkaamalla XML dokumentti aukeaa uuteen ikkunaan. Kun käyttäjä painaa "Run parser" nappia, ohjelma suorittaa valitun tiedoston parsinnan ja näyttää Credit/Debit summan käyttäjälle (total sum sekä summat kuukausittain eriteltynä). Parseroinnin tulos esitetään joko uudessa ikkunassa tai sisällyttää tiedostojen perusnäkymään (päätetään myöhemmin).
+Kun käyttäjä valtsee levyltä tiedoston, tiedosto ilmestyy tiedostojen perusnäkymään. Jokaisen tiedoston vieressä on "radio button" ja tiedostoa klikkaamalla XML dokumentti aukeaa uuteen ikkunaan. Jokaisella tiedostolla on myös painike, jolla pelkästään kyseinen tiedosto voidaan poistaa tiedostolistasta. Kun käyttäjä painaa "Run parser" nappia, ohjelma suorittaa valitun tiedoston parsinnan ja näyttää Credit/Debit summan käyttäjälle (total sum sekä summat kuukausittain eriteltynä). Parseroinnin tulos esitetään joko uudessa ikkunassa tai sisällyttää tiedostojen perusnäkymään (päätetään myöhemmin).
 
 (Tarkka selvitys XML tiedoston parsinnasta lisätään tähän viikolla 6. tai viikolla 7.)
 
@@ -25,3 +25,26 @@ Jos DOM parserin käyttö ei jostain syystä onnistu, pystytään projektin vaat
 
 Tällä hetkellä menubarin kolme näkymää (JPanel) lisätään käynnistämisen yhteydessä soveulluksen main frameen (JFrame). Kun näkymää vaihdetaan, näytettävä paneeli muutetaan näkyväksi ja loput piilotetaan. Jos vaihdettavien näkymien tarvitsema muisti kasvaa, olisi varmaankin parempi että HTML paneelit ladattaisiin vasta, kun ne halutaan nähdä ja vapautettaisiin näkymää vaihdettaessa. Projektin mittakaavassa tämä tuskin on ongelma, mutta voin testata tätä ajan salliessa projektin lopussa.
 
+## Luokkakaavio
+
+![](xml_parser_classdiagram.png)
+
+* **Main:** Käynnistää ohjelman
+* **MenuFrame:** Sovelluksen pääikkuna ja menubar
+* **HTMLPanel:** HTML-tiedosto näyttäminen, esim. Help -> User Guide
+* **ParsingPanel:** Valittujen tiedostojen näkymä ja parsinnan käskytys
+* **XMLfile** Sisältää XML tiedoston datan ja metadatan
+* **XMLframe** Näyttää valitun XML tiedoston uudessa ikkunassa
+
+
+HUOM! XMLfile ja XMLframen yhteyden numerot ovat kuvassa väärinpäin. Frameen täytyy siis aina kohdistia yksi File (ei voida muodostaa ikkunaa ilman valittua tiedostoa, mutta tiedostoon ei välttämättä liity ikkunaa, jos kyseinen tiedosto ei ole avattuna). Korjataan seuraavan versioon.
+
+Alustava hahmotelma, luokkien nimiä ja rakennetta voidaan jouduta refaktoroimaan. Projektin lopussa lisätään uusi lopullinen luokkakaavio.
+
+## Aikatalu
+
+* **Week 5.:** ~~Java AWT/Swing tutustuminen, GUI runko, Suunnitelma~~ OK
+* **Week 6.:** XML tiedoston valitseminen levyltä ja valinnan poisto, Tärkeimmät parserointi toiminnallisuudet, XML tiedoston näyttäminen GUI:ssa,
+* **Week 7.:** Puuttuvat lisätoiminnallisuudet, koodin refaktorointi ja kommentointi
+* **Week 8.:** Hienosäätö, Demo
+* **Week 9.:** Tarvittaessa
