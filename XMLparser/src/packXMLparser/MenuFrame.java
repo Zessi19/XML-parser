@@ -31,7 +31,7 @@ public class MenuFrame extends JFrame implements ActionListener {
 		this.setSize(this.xPixels, this.yPixels);
 		this.setLayout(new FlowLayout());
 		
-		// Profium logo to Frame
+		// Set Logo
 		ImageIcon logo = new ImageIcon("src/appImages/logo_small.png");
 		Image scaledLogo = logo.getImage().getScaledInstance(120,120,java.awt.Image.SCALE_SMOOTH);
 		ImageIcon newLogo = new ImageIcon(scaledLogo);

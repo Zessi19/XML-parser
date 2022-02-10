@@ -23,25 +23,11 @@ public class ParsingPanel extends JPanel {
 		this.radioButtons = new ArrayList<JRadioButton>();		
 		this.radioGroup = new ButtonGroup();
 		
-		// Test Case (Radio)
-		//JRadioButton r1 = new JRadioButton();
-		//r1.setSelected(true);
-		//radioButtons.add(r1);
-		
-		// Test Case (File)
-		//JButton nb = new JButton("test1.xml");
-		//nb.setName("1");
-		//nb.addActionListener(e -> System.out.println(nb.getName()));
-		//fileButtons.add(nb);
-
-
-		
-		this.updateButtons();
+		//this.updateButtons();
 		this.setVisible(true);
 	}
 	
-	// JButton indexing starts from zero!
-	
+	// JButton indexing starts from zero!	
 	public void addFile(File file) {
 		this.fileList.add(file);
 		
@@ -57,7 +43,6 @@ public class ParsingPanel extends JPanel {
 		this.updateButtons();
 		this.revalidate();
 		this.repaint();
-		
 		
 		//System.out.println("Added: " + file.getName());
 		//System.out.println("Path: " + file.getPath());
@@ -86,9 +71,22 @@ public class ParsingPanel extends JPanel {
 	}
 	
 	private void openXMLfile(int nElement) {
-		
-		System.out.println(this.fileList.get(nElement).getPath());
-		
+		File file = this.fileList.get(nElement);
+		XMLframe newFrame = new XMLframe(file);
 	}
 
 }
+
+
+
+
+//Test Case (Radio)
+//JRadioButton r1 = new JRadioButton();
+//r1.setSelected(true);
+//radioButtons.add(r1);
+			
+// Test Case (File)
+//JButton nb = new JButton("test1.xml");
+//nb.setName("1");
+//nb.addActionListener(e -> System.out.println(nb.getName()));
+//fileButtons.add(nb);
