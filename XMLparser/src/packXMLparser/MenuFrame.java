@@ -3,6 +3,7 @@ package packXMLparser;
 import javax.swing.*;
 
 import java.awt.event.*;
+import java.io.File;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -20,11 +21,12 @@ public class MenuFrame extends JFrame implements ActionListener {
 	ParsingPanel parsingPanel;
 	HTMLpanel guidePanel, keybindsPanel;
 	
+	JFileChooser jFileChooser;
+	
 	
 	public MenuFrame() {
 		// Initialize Frame
 		this.setTitle("XML Parser");
-		//this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(this.xPixels, this.yPixels);
 		this.setLayout(new FlowLayout());
@@ -34,6 +36,9 @@ public class MenuFrame extends JFrame implements ActionListener {
 		Image scaledLogo = logo.getImage().getScaledInstance(120,120,java.awt.Image.SCALE_SMOOTH);
 		ImageIcon newLogo = new ImageIcon(scaledLogo);
 		this.setIconImage(newLogo.getImage());
+		
+		// File Chooser
+		this.jFileChooser = new JFileChooser(System.getProperty("user.dir"));
 		
 		// Menu Bars
 		this.menubar = new JMenuBar();
@@ -53,22 +58,15 @@ public class MenuFrame extends JFrame implements ActionListener {
 		
 		// JPanels
 		this.parsingPanel = new ParsingPanel();
+		
 		this.guidePanel = new HTMLpanel("guide.html", this.xPixels, this.yPixels);
 		this.keybindsPanel = new HTMLpanel("keybinds.html", this.xPixels, this.yPixels);
 		
-		this.add(this.parsingPanel.getJPanel(), BorderLayout.CENTER);
-		this.add(this.guidePanel.getJPanel(), BorderLayout.CENTER);
-		this.add(this.keybindsPanel.getJPanel(), BorderLayout.CENTER);
-		 
+		//this.add(this.parsingPanel.getJPanel(), BorderLayout.CENTER);
+		this.add(this.parsingPanel);
 		
-		// Poistoon ? {
-			/*frame.getContentPane().add(this.jScrollPane, BorderLayout.CENTER);
-			red = new JPanel();
-			this.add(red);	
-			red.setBackground(Color.RED);
-			red.setPreferredSize(new Dimension(this.xPixels, this.yPixels));
-			red.setVisible(true);
-			 */
+		this.add(this.guidePanel.getJPanel());
+		this.add(this.keybindsPanel.getJPanel()); // BorderLayout.CENTER
 		
 		// Listeners
 		showItem.addActionListener(this);
@@ -77,32 +75,41 @@ public class MenuFrame extends JFrame implements ActionListener {
 		guideItem.addActionListener(this);
 		keybindItem.addActionListener(this);
 		
-		this.setVisible(true);	
+		this.setVisible(true);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getSource() == showItem) {
-			this.parsingPanel.show();
+			this.parsingPanel.setVisible(true);
 			this.guidePanel.hide();
 			this.keybindsPanel.hide();
 		
 		} else if (e.getSource() == addItem) {
-			System.out.println("Add File");
+			selectFile();
 		
 		} else if (e.getSource() == removeItem) {
-			System.out.println("Remove Files");
+			this.parsingPanel.removeFiles();
 			
 		} else if (e.getSource() == guideItem) {
 			this.guidePanel.show();
 			this.keybindsPanel.hide();
-			this.parsingPanel.hide();
+			this.parsingPanel.setVisible(false);
 			
 		} else if (e.getSource() == keybindItem) {
 			this.keybindsPanel.show();
-			this.guidePanel.hide();
-			this.parsingPanel.hide();
+			this.guidePanel.hide();			
+			this.parsingPanel.setVisible(false);
+		}
+	}
+	
+	public void selectFile() {
+		int returnValue = this.jFileChooser.showOpenDialog(null);
+		
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			File file = this.jFileChooser.getSelectedFile();
+			this.parsingPanel.addFile(file);
 		}
 	}
 	

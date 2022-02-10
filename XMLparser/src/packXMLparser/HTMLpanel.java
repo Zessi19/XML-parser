@@ -8,19 +8,16 @@ import javax.swing.JOptionPane;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.LayoutManager;
 
 public class HTMLpanel {
 	private JPanel mainJPanel;
 	private JEditorPane jEditorPane;
 	private JScrollPane jScrollPane;
-	private LayoutManager layout;
 	
 	public HTMLpanel(String filename, int xPixels, int yPixels) {
 		// Set-up Main Panel
 		this.mainJPanel = new JPanel();
-	    this.layout = new FlowLayout();  
-	    this.mainJPanel.setLayout(layout);
+	    this.mainJPanel.setLayout(new FlowLayout());
 	    
 	    this.jEditorPane = new JEditorPane();
 		this.jEditorPane.setEditable(false);
