@@ -10,7 +10,9 @@ import java.awt.FlowLayout;
 import java.awt.Image;
 
 public class MenuFrame extends JFrame implements ActionListener {
-	public final int xPixels = 720, yPixels = 520;
+	// 4:3 Aspect Ratio, 1.2*[480,640]
+	public final int xPixels = 768;
+	public final int yPixels = 576;
 	
 	// Menu items
 	JMenuBar menubar;
@@ -19,10 +21,8 @@ public class MenuFrame extends JFrame implements ActionListener {
 	
 	// Panels
 	ParsingPanel parsingPanel;
-	HTMLpanel guidePanel, keybindsPanel;
-	
+	HTMLpanel guidePanel, keybindsPanel;	
 	JFileChooser jFileChooser;
-	
 	
 	public MenuFrame() {
 		// Initialize Frame
@@ -57,16 +57,14 @@ public class MenuFrame extends JFrame implements ActionListener {
 		this.setJMenuBar(menubar);
 		
 		// JPanels
-		this.parsingPanel = new ParsingPanel();
-		
+		this.parsingPanel = new ParsingPanel(this.xPixels, this.yPixels);
 		this.guidePanel = new HTMLpanel("guide.html", this.xPixels, this.yPixels);
 		this.keybindsPanel = new HTMLpanel("keybinds.html", this.xPixels, this.yPixels);
 		
-		//this.add(this.parsingPanel.getJPanel(), BorderLayout.CENTER);
-		this.add(this.parsingPanel);
-		
-		this.add(this.guidePanel.getJPanel());
-		this.add(this.keybindsPanel.getJPanel()); // BorderLayout.CENTER
+		// this.add(this.parsingPanel.getJPanel(), BorderLayout.CENTER);
+		this.getContentPane().add(this.parsingPanel);	
+		this.getContentPane().add(this.guidePanel.getJPanel());
+		this.getContentPane().add(this.keybindsPanel.getJPanel());
 		
 		// Listeners
 		showItem.addActionListener(this);
@@ -75,6 +73,8 @@ public class MenuFrame extends JFrame implements ActionListener {
 		guideItem.addActionListener(this);
 		keybindItem.addActionListener(this);
 		
+		//this.pack();
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 	

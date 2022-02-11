@@ -34,7 +34,7 @@ public class HTMLpanel {
 
         // Add attachments to Main Panel
         this.jScrollPane = new JScrollPane(jEditorPane);
-        this.jScrollPane.setPreferredSize(new Dimension(xPixels-50, yPixels-75));
+        this.jScrollPane.setPreferredSize(new Dimension(xPixels-40, yPixels-80));
         
         this.mainJPanel.add(jScrollPane);
         this.hide();

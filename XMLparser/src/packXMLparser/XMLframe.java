@@ -9,19 +9,22 @@ import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
 import javax.swing.JOptionPane;
 
+// Aspect Ratio 4:3 Frame (480,640):
+
 public class XMLframe extends JFrame {
-	private final int xPixels = 720;
-	private final int yPixels = 520;
+	private final int xPixels = 640;
+	private final int yPixels = 480;
 	private static final long serialVersionUID = 7526472295622776147L;
 	
 	private JEditorPane jEditorPane;
 	private JScrollPane jScrollPane;
 	
 	public XMLframe(File file) {
-		// Set frame parameters
+		
+		// Setup Frame parameters
 		this.setupFrame(file.getName());
 		
-		// Read XML file
+		// Read XML-file
 		this.jEditorPane = new JEditorPane();
 		this.jEditorPane.setEditable(false);
 		
@@ -36,6 +39,8 @@ public class XMLframe extends JFrame {
 		// Add Scroll bar 
 		this.jScrollPane = new JScrollPane(jEditorPane);
         this.add(this.jScrollPane);
+        
+        this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 	
@@ -52,10 +57,3 @@ public class XMLframe extends JFrame {
 	}
 	
 }
-
-// Old parameters
-
-//this.setLayout(new FlowLayout());
-//this.jScrollPane.setPreferredSize(new Dimension(xPixels-50, yPixels-50));
-
-
