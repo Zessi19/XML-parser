@@ -19,12 +19,14 @@ public class ParsingPanel extends JPanel {
 	private JScrollPane jScrollPane;
 	
 	private List<File> fileList;
+	private List<FileDOM> domList;
 	private List<JButton> fileButtons;
 	private List<JRadioButton> radioButtons;
 	private ButtonGroup radioGroup;
 	
 	public ParsingPanel(int xPixels, int yPixels) {
 		this.fileList = new ArrayList<File>();
+		this.domList = new ArrayList<FileDOM>();
 		this.fileButtons = new ArrayList<JButton>();
 		this.radioButtons = new ArrayList<JRadioButton>();
 		
@@ -85,6 +87,7 @@ public class ParsingPanel extends JPanel {
 	
 	public void addFile(File file) {
 		this.fileList.add(file);
+		this.domList.add(new FileDOM(file));
 		
 		// Set JRadioButton
 		JRadioButton nrb = new JRadioButton();
@@ -114,6 +117,7 @@ public class ParsingPanel extends JPanel {
 	
 	public void removeFiles() {
 		this.fileList.clear();
+		this.domList.clear();
 		this.fileButtons.clear();
 		this.radioButtons.clear();
 		
@@ -130,6 +134,8 @@ public class ParsingPanel extends JPanel {
 	private void runParser() {
 		
 		System.out.println("Parseroidaan: " + fileList.get(selected).getName());
+		
+		this.domList.get(this.selected).getBalance();
 		
 	}
 	
