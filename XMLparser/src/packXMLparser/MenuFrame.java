@@ -39,6 +39,7 @@ public class MenuFrame extends JFrame implements ActionListener {
 		
 		// File Chooser
 		this.jFileChooser = new JFileChooser(System.getProperty("user.dir"));
+		this.jFileChooser.setMultiSelectionEnabled(true);
 		
 		// Menu Bars
 		this.menubar = new JMenuBar();
@@ -61,7 +62,6 @@ public class MenuFrame extends JFrame implements ActionListener {
 		this.guidePanel = new HTMLpanel("guide.html", this.xPixels, this.yPixels);
 		this.keybindsPanel = new HTMLpanel("keybinds.html", this.xPixels, this.yPixels);
 		
-		// this.add(this.parsingPanel.getJPanel(), BorderLayout.CENTER);
 		this.getContentPane().add(this.parsingPanel);	
 		this.getContentPane().add(this.guidePanel.getJPanel());
 		this.getContentPane().add(this.keybindsPanel.getJPanel());
@@ -73,7 +73,6 @@ public class MenuFrame extends JFrame implements ActionListener {
 		guideItem.addActionListener(this);
 		keybindItem.addActionListener(this);
 		
-		//this.pack();
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
@@ -108,8 +107,11 @@ public class MenuFrame extends JFrame implements ActionListener {
 		int returnValue = this.jFileChooser.showOpenDialog(null);
 		
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			File file = this.jFileChooser.getSelectedFile();
-			this.parsingPanel.addFile(file);
+			File[] files = this.jFileChooser.getSelectedFiles();
+			
+			for (int i=0; i<files.length; i++) {
+				this.parsingPanel.addFile(files[i]);
+			}
 		}
 	}
 	

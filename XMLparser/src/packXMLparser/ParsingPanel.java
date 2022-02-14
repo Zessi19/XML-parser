@@ -131,6 +131,7 @@ public class ParsingPanel extends JPanel {
 		XMLframe newFrame = new XMLframe(file);
 	}
 	
+	// Kesken
 	private void runParser() {
 		
 		System.out.println("Parseroidaan: " + fileList.get(selected).getName());
@@ -140,9 +141,22 @@ public class ParsingPanel extends JPanel {
 	}
 	
 	private void deleteSelected() {
+		this.fileList.remove(this.selected);
+		this.domList.remove(this.selected);
 		
-		System.out.println("Poistetaan: " + fileList.get(selected).getName());
+		this.fileButtons.remove(this.selected);
+		this.radioButtons.remove(this.selected);
 		
+		// Rename button "numbers"
+		for (int i=0; i<radioButtons.size(); i++) {
+			this.radioButtons.get(i).setName(String.valueOf(i));
+			this.fileButtons.get(i).setName(String.valueOf(i));
+		}
+		
+		this.filePanel.removeAll();
+		this.updateFilePanel();
+		this.filePanel.revalidate();
+		this.filePanel.repaint();
 	}
 	
 }

@@ -30,17 +30,15 @@ public class FileDOM {
 
 	        // Parse XML file
 	        this.db = dbf.newDocumentBuilder();
-
 	        this.doc = db.parse(file);
 
 	        // Normalization (Explained in Link below):
+	        // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
 	        this.doc.getDocumentElement().normalize();
 
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			e.printStackTrace();
 		}
-		
-		// (Normalization): / http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
 	}
 	
 	public void getBalance() {
