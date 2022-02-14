@@ -19,11 +19,13 @@ Kun käyttäjä valtsee levyltä tiedoston, tiedosto ilmestyy tiedostojen perusn
 
 ## Avoimet kysymykset
 
-Suunnitelma on käyttää Javan kirjastoista löytyvää DOM parseria, kun data luetaan XML-tiedostosta. DOM parser lukee datan puu-tyyppiseen tietorakenteeseen ja mahdollistaa datan monipuolisemman käsittelyn ja parsinnan. DOM parserin käyttö voi aiheuttaa isommilla data määrillä pullonkaulan muistin käytössä, mutta projektin tapauksessa tämä ei ole ongelma. 
+* **Edit: DOM (org.w3c.dom) OK!**
+  - Suunnitelma on käyttää Javan kirjastoista löytyvää DOM parseria, kun data luetaan XML-tiedostosta. DOM parser lukee datan puu-tyyppiseen tietorakenteeseen ja mahdollistaa datan monipuolisemman käsittelyn ja parsinnan. DOM parserin käyttö voi aiheuttaa isommilla data määrillä pullonkaulan muistin käytössä, mutta projektin tapauksessa tämä ei ole ongelma. 
 
-Jos DOM parserin käyttö ei jostain syystä onnistu, pystytään projektin vaatimat summat ja kuukausisummat laskea myös yksinkertisesti lukemalla tiedostoa riviviltä ja laskemalla kumulatiivista summaa riveittäin "rivi Stringiä" kirjain kirjaimelta läpikäymällä O(n) ajassa. Tällöin parsinta kannattaa suorittaa kerran tiedoston avaamisen yhteydessä ja tulokset säilötään muistiin uusinta kyselyjen varalle. Toki tämä on erittäin huonosti skaalautuva tyyli, kun XML schema monimutkaistuu, erilaisten kyselyiden määrä kasvaa, tai XML tiedostoon pitäisi lisätä dataa tai muokata sitä.
+  - Jos DOM parserin käyttö ei jostain syystä onnistu, pystytään projektin vaatimat summat ja kuukausisummat laskea myös yksinkertisesti lukemalla tiedostoa riviviltä ja laskemalla kumulatiivista summaa riveittäin "rivi Stringiä" kirjain kirjaimelta läpikäymällä O(n) ajassa. Tällöin parsinta kannattaa suorittaa kerran tiedoston avaamisen yhteydessä ja tulokset säilötään muistiin uusinta kyselyjen varalle. Toki tämä on erittäin huonosti skaalautuva tyyli, kun XML schema monimutkaistuu, erilaisten kyselyiden määrä kasvaa, tai XML tiedostoon pitäisi lisätä dataa tai muokata sitä.
 
-Tällä hetkellä menubarin kolme näkymää (JPanel) lisätään käynnistämisen yhteydessä soveulluksen main frameen (JFrame). Kun näkymää vaihdetaan, näytettävä paneeli muutetaan näkyväksi ja loput piilotetaan. Jos vaihdettavien näkymien tarvitsema muisti kasvaa, olisi varmaankin parempi että HTML paneelit ladattaisiin vasta, kun ne halutaan nähdä ja vapautettaisiin näkymää vaihdettaessa. Projektin mittakaavassa tämä tuskin on ongelma, mutta voin testata tätä ajan salliessa projektin lopussa.
+* **Edit: Ei muodostu ongelmaa tässä projektissa**
+  - Tällä hetkellä menubarin kolme näkymää (JPanel) lisätään käynnistämisen yhteydessä soveulluksen main frameen (JFrame). Kun näkymää vaihdetaan, näytettävä paneeli muutetaan näkyväksi ja loput piilotetaan. Jos vaihdettavien näkymien tarvitsema muisti kasvaa, olisi varmaankin parempi että HTML paneelit ladattaisiin vasta, kun ne halutaan nähdä ja vapautettaisiin näkymää vaihdettaessa. Projektin mittakaavassa tämä tuskin on ongelma, mutta voin testata tätä ajan salliessa projektin lopussa.
 
 ## Luokkakaavio
 
@@ -44,7 +46,7 @@ Alustava hahmotelma, luokkien nimiä ja rakennetta voidaan jouduta refaktoroimaa
 ## Aikatalu
 
 * **Week 5.:** ~~Java AWT/Swing tutustuminen, GUI runko, Suunnitelma~~ OK
-* **Week 6.:** XML tiedoston valitseminen levyltä ja valinnan poisto, Tärkeimmät parserointi toiminnallisuudet, XML tiedoston näyttäminen GUI:ssa,
+* **Week 6.:** ~~XML tiedoston valitseminen levyltä ja valinnan poisto, Tärkeimmät parserointi toiminnallisuudet, XML tiedoston näyttäminen GUI:ssa~~ OK
 * **Week 7.:** Puuttuvat lisätoiminnallisuudet, koodin refaktorointi ja kommentointi
 * **Week 8.:** Hienosäätö, Demo
 * **Week 9.:** Tarvittaessa
