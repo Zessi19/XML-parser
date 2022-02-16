@@ -97,7 +97,7 @@ public class ParsingPanel extends JPanel {
 		nrb.setName(String.valueOf(radioButtons.size()));
 		nrb.addActionListener( e -> {
 			this.selected = Integer.parseInt(nrb.getName());
-			System.out.println(selected);
+			//System.out.println(selected);
 		});
 		this.radioButtons.add(nrb);
 		
@@ -128,16 +128,14 @@ public class ParsingPanel extends JPanel {
 	
 	private void openXMLfile(int nElement) {
 		File file = this.fileList.get(nElement);
-		XMLframe newFrame = new XMLframe(file);
+		DataFrame newFrame = new DataFrame(file);
 	}
 	
-	// Kesken
 	private void runParser() {
+		String fname = "Results: " + this.domList.get(this.selected).getFilename();
+		String html = this.domList.get(this.selected).outputHTML();
 		
-		System.out.println("Parseroidaan: " + fileList.get(selected).getName());
-		
-		this.domList.get(this.selected).getBalance();
-		
+		DataFrame newFrame = new DataFrame(fname, html);
 	}
 	
 	private void deleteSelected() {

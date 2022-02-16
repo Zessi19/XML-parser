@@ -7,11 +7,12 @@ import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
+import javax.swing.text.html.StyleSheet;
 import javax.swing.JOptionPane;
 
 // Aspect Ratio 4:3 Frame (480,640):
 
-public class XMLframe extends JFrame {
+public class DataFrame extends JFrame {
 	private final int xPixels = 640;
 	private final int yPixels = 480;
 	private static final long serialVersionUID = 7526472295622776147L;
@@ -19,7 +20,8 @@ public class XMLframe extends JFrame {
 	private JEditorPane jEditorPane;
 	private JScrollPane jScrollPane;
 	
-	public XMLframe(File file) {
+	// Constructor 1. (Open XML file)
+	public DataFrame(File file) {
 		
 		// Setup Frame parameters
 		this.setupFrame(file.getName());
@@ -36,14 +38,24 @@ public class XMLframe extends JFrame {
         	JOptionPane.showMessageDialog(null, "Cannot open a file: " + file.getName(), "Infobox", JOptionPane.INFORMATION_MESSAGE);
         }
 		
-		// Add Scroll bar 
-		this.jScrollPane = new JScrollPane(jEditorPane);
-        this.add(this.jScrollPane);
-        
-        this.setLocationRelativeTo(null);
-		this.setVisible(true);
+		this.finishFrame();
 	}
 	
+	// Constructor 2. (Show HTML String)
+	public DataFrame(String fname, String html) {
+		this.setupFrame(fname);
+		
+		// Set Input Text		
+	    this.jEditorPane = new JEditorPane();
+		this.jEditorPane.setEditable(false);
+		
+		this.jEditorPane.setContentType("text/html");
+		this.jEditorPane.setText(html);
+		
+		this.finishFrame();
+	}
+	
+	// Frame setup
 	private void setupFrame(String filename) {
 		this.setTitle(filename);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -54,6 +66,16 @@ public class XMLframe extends JFrame {
 		Image scaledLogo = logo.getImage().getScaledInstance(120,120,java.awt.Image.SCALE_SMOOTH);
 		ImageIcon newLogo = new ImageIcon(scaledLogo);
 		this.setIconImage(newLogo.getImage());
+	}
+	
+	private void finishFrame() {
+		// Add Scroll bar 
+		this.jScrollPane = new JScrollPane(jEditorPane);
+		this.add(this.jScrollPane);
+		
+		// Set location and visibility
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
 	}
 	
 }

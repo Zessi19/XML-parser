@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<root>
+	<month number="2">
+		<credit>10.00</credit>
+		<credit>20.00</credit>
+		<debit>-5.00</debit>
+	</month>
+	<month number="5">
+		<debit>-100.00</debit>
+		<debit>-100.00</debit>
+		<credit>5.00</credit>
+	</month>
+	<credit>190.00</credit>
+	<month number="11">
+		<credit>2500.00</credit>
+		<debit>-450.00</debit>
+		<debit>-50.00</debit>
+	</month>
+	<debit>-15.00</debit>
+</root>
