@@ -4,29 +4,37 @@ import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.BoxLayout;
 
-public class ParsingPanel extends JPanel {
+public class ParsingJPanel extends JPanel {
+	private static final long serialVersionUID = 358722791501541073L;
 	private int selected;
 	
+	//private JTextField note;
 	private JPanel filePanel, commandPanel;
 	private JButton runButton, deleteButton;
 	private JScrollPane jScrollPane;
 	
 	private List<File> fileList;
-	private List<FileDOM> domList;
+	private List<XmlDom> domList;
 	private List<JButton> fileButtons;
 	private List<JRadioButton> radioButtons;
 	private ButtonGroup radioGroup;
 	
-	public ParsingPanel(int xPixels, int yPixels) {
+	public ParsingJPanel(int xPixels, int yPixels) {
 		this.fileList = new ArrayList<File>();
-		this.domList = new ArrayList<FileDOM>();
+		this.domList = new ArrayList<XmlDom>();
 		this.fileButtons = new ArrayList<JButton>();
 		this.radioButtons = new ArrayList<JRadioButton>();
 		
@@ -39,6 +47,8 @@ public class ParsingPanel extends JPanel {
 		this.setPreferredSize(new Dimension(xPixels-20, yPixels-70));
 		
 		filePanel.setLayout(new BoxLayout(filePanel, BoxLayout.PAGE_AXIS));
+		//this.note = new JTextField("No Files Selected");
+		//filePanel.add(note);
 		
 		commandPanel.setLayout(new FlowLayout());
 		commandPanel.setPreferredSize(new Dimension(xPixels-20, yPixels-450));
@@ -87,7 +97,7 @@ public class ParsingPanel extends JPanel {
 	
 	public void addFile(File file) {
 		this.fileList.add(file);
-		this.domList.add(new FileDOM(file));
+		this.domList.add(new XmlDom(file));
 		
 		// Set JRadioButton
 		JRadioButton nrb = new JRadioButton();
@@ -128,14 +138,14 @@ public class ParsingPanel extends JPanel {
 	
 	private void openXMLfile(int nElement) {
 		File file = this.fileList.get(nElement);
-		DataFrame newFrame = new DataFrame(file);
+		DataJFrame newFrame = new DataJFrame(file);
 	}
 	
 	private void runParser() {
 		String fname = "Results: " + this.domList.get(this.selected).getFilename();
 		String html = this.domList.get(this.selected).outputHTML();
 		
-		DataFrame newFrame = new DataFrame(fname, html);
+		DataJFrame newFrame = new DataJFrame(fname, html);
 	}
 	
 	private void deleteSelected() {

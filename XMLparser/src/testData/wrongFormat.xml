@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<root>
+	<kissa number="10">
+		<credit>100.00</credit>
+		<credit>200.00</credit>
+		<debit>-50.00</debit>
+	</month>
+	<koira number="11">
+		<credit>100.00</credit>
+		<credit>200.00</credit>
+		<debit>-100.00</debit>
+	</month>
+	<month asd="12">
+		<credit>100.00</credit>
+		<credit>200.00</credit>
+		<debit>-150.00</debit>
+</root>

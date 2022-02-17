@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<balance>
+<root>
 	<credit>25.00</credit>
 	<credit>25.00</credit>
 	<debit>-50.00</debit>
@@ -9,4 +9,4 @@
 	<credit>5.00</credit>
 	<credit>5.00</credit>
 	<debit>-25.00</debit>
-</balance>
+</root>

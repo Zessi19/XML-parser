@@ -7,12 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
-import javax.swing.text.html.StyleSheet;
 import javax.swing.JOptionPane;
 
-// Aspect Ratio 4:3 Frame (480,640):
-
-public class DataFrame extends JFrame {
+public class DataJFrame extends JFrame {
+	// Aspect Ratio 4:3 Frame: [480,640]
 	private final int xPixels = 640;
 	private final int yPixels = 480;
 	private static final long serialVersionUID = 7526472295622776147L;
@@ -21,7 +19,7 @@ public class DataFrame extends JFrame {
 	private JScrollPane jScrollPane;
 	
 	// Constructor 1. (Open XML file)
-	public DataFrame(File file) {
+	public DataJFrame(File file) {
 		
 		// Setup Frame parameters
 		this.setupFrame(file.getName());
@@ -42,7 +40,7 @@ public class DataFrame extends JFrame {
 	}
 	
 	// Constructor 2. (Show HTML String)
-	public DataFrame(String fname, String html) {
+	public DataJFrame(String fname, String html) {
 		this.setupFrame(fname);
 		
 		// Set Input Text		

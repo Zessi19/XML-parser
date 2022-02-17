@@ -12,13 +12,14 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.swing.JOptionPane;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class FileDOM {
-	private String filename;
+public class XmlDom {
+	private String fname;
 	private DocumentBuilderFactory dbf;
 	private DocumentBuilder db;
 	private Document doc;
@@ -29,8 +30,8 @@ public class FileDOM {
 	// More info: https://stackoverflow.com/questions/46355454/how-to-fix-error-the-markup-in-the-document-following-the-root-element-must-be
 	
 	// Constructor
-	public FileDOM(File file) {
-		this.filename = file.getName();
+	public XmlDom(File file) {
+		this.fname = file.getName();
 		
 		// Instantiate the Factory
 		this.dbf = DocumentBuilderFactory.newInstance();
@@ -49,15 +50,16 @@ public class FileDOM {
 
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Cannot parse DOM from a file: " + fname, "Infobox", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	
-	// -------------------------------
-	//   FileDOM Class Methods
-	// -------------------------------
+	// -------------------
+	//    Class Methods
+	// -------------------
 	
 	public String getFilename() {
-		return this.filename;
+		return this.fname;
 	}
 	
 	public String outputHTML() {
@@ -78,10 +80,10 @@ public class FileDOM {
 		output += "<h2>Total Balance by Month</h2>";
 		output += "<ul>";
 		for (int i=0; i<months.length-1; i++) {
-			output += "<li>" + months[i] + " = " + String.format("%.2f",sums[i+1]) + "</li>";
+			output += "<li><b>" + months[i] + "</b> = " + String.format("%.2f",sums[i+1]) + "</li>";
 		}
-		output += "<li>Invalid Month: " + sums[0] + "</li>";
-		output += "<li>No Attr: " + noAttr + "</li>";
+		output += "<li><b>Invalid Month</b> = " + String.format("%.2f", sums[0]) + "</li>";
+		output += "<li><b>No Attr</b> = " + String.format("%.2f", noAttr) + "</li>";
 		output += "</ul>";
 		
 		//testString = "<table class='styled-table'><thead><tr><th>Name</th><th>Points</th></tr></thead><tbody><tr><td>Dom</td><td>6000</td></tr><tr class='active-row'><td>Melissa</td><td>5150</td></tr><!-- and so on... --></tbody></table>";
