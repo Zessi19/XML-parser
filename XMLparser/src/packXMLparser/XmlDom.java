@@ -46,7 +46,7 @@ public class XmlDom {
 
 	        // Normalization (Explained in Link below):
 	        // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
-	        this.doc.getDocumentElement().normalize();
+	        this.doc.getDocumentElement().normalize();  
 
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			e.printStackTrace();
@@ -70,23 +70,25 @@ public class XmlDom {
 		DateFormatSymbols dfs = new DateFormatSymbols(Locale.US);
 		String[] months = dfs.getShortMonths();
 		
-		double noAttr = total-DoubleStream.of(sums).sum();
-				
-		// Format output
-		output += "<h2>Total Balance</h2>";
-		output += "<b>Balance = </b>" + String.format("%.2f", total);
+		double monthAttr = DoubleStream.of(sums).sum();
+		double noAttr = total - monthAttr;
 		
-				
+		// Total sums
+		output += "<h2>Total Balance</h2>";
+		output += "<ul>";
+		output += "<li><b>Total = </b>" + String.format("%.2f", total) + "</li>";
+		output += "<li><b>Total (Month Attr) = </b>" + String.format("%.2f", monthAttr) + "</li>";
+		output += "<li><b>Total (No Attr) = </b>" + String.format("%.2f", noAttr) + "</li>";
+		output += "</ul>";
+
+		// Month values
 		output += "<h2>Total Balance by Month</h2>";
 		output += "<ul>";
 		for (int i=0; i<months.length-1; i++) {
 			output += "<li><b>" + months[i] + "</b> = " + String.format("%.2f",sums[i+1]) + "</li>";
 		}
 		output += "<li><b>Invalid Month</b> = " + String.format("%.2f", sums[0]) + "</li>";
-		output += "<li><b>No Attr</b> = " + String.format("%.2f", noAttr) + "</li>";
 		output += "</ul>";
-		
-		//testString = "<table class='styled-table'><thead><tr><th>Name</th><th>Points</th></tr></thead><tbody><tr><td>Dom</td><td>6000</td></tr><tr class='active-row'><td>Melissa</td><td>5150</td></tr><!-- and so on... --></tbody></table>";
 		
 		return output;
 	}
@@ -154,3 +156,5 @@ public class XmlDom {
 	}
 
 }
+
+//String testString = "<table class='styled-table'><thead><tr><th>Name</th><th>Points</th></tr></thead><tbody><tr><td>Dom</td><td>6000</td></tr><tr class='active-row'><td>Melissa</td><td>5150</td></tr><!-- and so on... --></tbody></table>";
