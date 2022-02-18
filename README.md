@@ -29,19 +29,14 @@ Kun käyttäjä valtsee levyltä tiedoston, tiedosto ilmestyy tiedostojen perusn
 
 ## Luokkakaavio
 
-![](xml_parser_classdiagram.png)
+![](documentation/classDiagram_new.png)
 
 * **Main:** Käynnistää ohjelman
-* **MenuFrame:** Sovelluksen pääikkuna ja menubar
-* **HTMLPanel:** HTML-tiedosto näyttäminen, esim. Help -> User Guide
-* **ParsingPanel:** Valittujen tiedostojen näkymä ja parsinnan käskytys
-* **XMLfile** Sisältää XML tiedoston datan ja metadatan
-* **XMLframe** Näyttää valitun XML tiedoston uudessa ikkunassa
-
-
-HUOM! XMLfile ja XMLframen yhteyden numerot ovat kuvassa väärinpäin. Frameen täytyy siis aina kohdistia yksi File (ei voida muodostaa ikkunaa ilman valittua tiedostoa, mutta tiedostoon ei välttämättä liity ikkunaa, jos kyseinen tiedosto ei ole avattuna). Korjataan seuraavan versioon.
-
-Alustava hahmotelma, luokkien nimiä ja rakennetta voidaan jouduta refaktoroimaan. Projektin lopussa lisätään uusi lopullinen luokkakaavio.
+* **MainJFrame:** Sovelluksen pääikkuna ja menubar
+* **HtmlJPanel:** HTML-tiedosto näyttäminen, esim. Help -> User Guide
+* **ParsingJPanel:** Sovelluksen päänäkymä: tiedostojen avaaminen, parsinnan käskytys, valitun tiedoston poisto
+* **XmlDom** Parsii XML-tiedoston DOM objektiksi, sisältää parsinta metodit, output HTML Stringinä
+* **DataJFrane** Parametrina annetun datan näyttäminen uudessa ikkunassa (Java File object tai HTML String)
 
 ## Aikatalu
 
