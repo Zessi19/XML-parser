@@ -14,4 +14,8 @@ Sunnitelman tavoitteet viikolle 6. savutettiin. GUI:n kaikki oleelliset komponen
 
 Puuttuvia toiminnallisuuksia on vielä parsinnan laajentaminen kuukausittaisen datan tapauksiin, parsinnan tulosten näyttäminen uudessa ikkunassa (voidaan käyttää valmista luokkaa pohjana) ja keybindejen lisääminen. Parsinta suoritetaan jo nyt Javan (org.w3c.dom) kirjaston avulla, joten laajennus tukemaan kuukausi-malli pitäisi sujua kivuttomasti. Luokkien nimeämistä on refaktotoitu selvemmäksi ja lopulliset muutokset päivitetään luokkakaavioon viimeistään seuraavan viikon palautuksessa.
 
-XML-tiedostoihin on lisätty yksi <balance> root-node, koska käytetty kirjasto vaati tätä. Tämän ei ole ongelma, vaikka ohjelman spekseissä vaadittaisiin ehdottomasti aikaisempaa tiedostomuotoa. Voimme tässä tapauksessa yksinkertaisesti kirjoittaa koodin, joka lisää root noden tiedostoon, ennen kuin tiedosto luetaan DOM-formaattiin. 
+XML-tiedostoihin on lisätty yksi <balance> root-node, koska käytetty kirjasto vaati tätä. Tämän ei ole ongelma, vaikka ohjelman spekseissä vaadittaisiin ehdottomasti aikaisempaa tiedostomuotoa. Voimme tässä tapauksessa yksinkertaisesti kirjoittaa koodin, joka lisää root noden tiedostoon, ennen kuin tiedosto luetaan DOM-formaattiin.
+  
+### Viikko 7.
+  
+Kaikki projektiin suunnitellut toiminnallisuudet ovat nyt valmiita. Viikolla projektiin lisättin: parsinnan laajennus tukemaan month -attribuuttia, keybinds ja action listenerien siirtäminen omiksi sub classeiksi, luokien uudelleen nimeäminen ja koodin refaktorointi, päivitettiin guide.html ja keybinds.html sisältö, ja fiksattiin valittujen tiedostojen näkymää. Yritin lisäksi saada CSS-tyylit toimimaan HTML-tiedostojen kanssa, mutta tämä osoittautui projektin puitteissa mahdottomaksi, koska Swing ei tue CSS-tyylejä tarvitsemallamme tavalla. 
