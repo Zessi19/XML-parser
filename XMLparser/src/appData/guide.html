@@ -1,17 +1,59 @@
 <!DOCTYPE html>
 <html>
 	<body>
-		<h1>Guide</h1>
-        <h2>This is Guide header</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-       	<p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>        
+		<h1>User Guide</h1>
+		
+        <h2>Menu bar functions</h2>
+        
+        <ul>
+        	<li><b>Files</b></li>
+        	<ul>
+      			<li><b>Show All</b> = Show selected files view</li>
+      			<li><b>Add New</b> = Add files from disk (use CTRL to select multiple)</li>
+      			<li><b>Remove All</b> = Remove all selected files</li>
+    		</ul>
+    		<li><b>Help</b></li>
+    		<ul>
+    			<li><b>User Guide</b> = Show user guide view</li>
+    			<li><b>Keybinds</b> = Show keybinds view</li>
+    		</ul>	
+        </ul>
+        
+        <h2>Parser commands (Show All)</h2>
+        
+        <ul>
+        	<li><b>File schema</b></li>
+        	<ul>
+      			<li>
+      			The program parses XML files with the following schema. The first line may include optional tag "?xml version='1.0'?".
+      			All other data must be enclosed inside a <b>root</b> node, which is named, for example, "root". Inside root node, <b>credit</b> 
+      			and <b>debit</b> nodes can be placed freely and they can be placed inside month node with <b>attribute number</b> = String(Integer).
+      			Check src/testData files for reference.
+      			</li>
+    		</ul>
+    		
+    		<li><b>Running Parser</b></li>
+    		<ul>
+    			<li>
+    			After adding files form a disk to the files view, user may browse through the files and open them by pressing a button 
+    			named after the file. To parse a file, user must select the corresponding radio button next to filename and then press 
+    			"Run Parser"" button at the bottom. Similarly, user can delete single selected file by pressing "Delete File" button.
+    			</li>
+        	</ul>
+        	
+        	<li><b>Parsing results</b></li>
+    		<ul>
+    			<li>
+    			Total Balance includes three figures. First value indicates the total sum all credit and debit values in the file, whether or not they 
+    			have given a month attribute. The Second value indicates the total sum of cases with a month attribute value and the third value the total sum of 
+    			cases without the month attribute. Therefore the sum of the second and the third value should be equal to the first value. 
+    			</li>
+    			<li>
+    			Finally, the total sums of credit and debit values of each month are shown. An invalid month contains values outside the closed interval [1,12].
+    			However, making the month attribute not a string presentation of integer will cause an error to the program.
+    			</li>
+        	</ul>     
+        </ul>
+                
   	</body>
  </html>

@@ -60,7 +60,7 @@ public class DataJFrame extends JFrame {
 		this.setSize(this.xPixels, this.yPixels);
 				
 		// Set Logo
-		ImageIcon logo = new ImageIcon("src/appImages/logo_small.png");
+		ImageIcon logo = new ImageIcon("src/appData/logo_small.png");
 		Image scaledLogo = logo.getImage().getScaledInstance(120,120,java.awt.Image.SCALE_SMOOTH);
 		ImageIcon newLogo = new ImageIcon(scaledLogo);
 		this.setIconImage(newLogo.getImage());

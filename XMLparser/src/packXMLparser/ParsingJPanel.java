@@ -9,9 +9,9 @@ import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 
 import javax.swing.Box;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
@@ -21,7 +21,7 @@ public class ParsingJPanel extends JPanel {
 	private static final long serialVersionUID = 358722791501541073L;
 	private int selected;
 	
-	//private JTextField note;
+	private JLabel note;
 	private JPanel filePanel, commandPanel;
 	private JButton runButton, deleteButton;
 	private JScrollPane jScrollPane;
@@ -46,9 +46,8 @@ public class ParsingJPanel extends JPanel {
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(xPixels-20, yPixels-70));
 		
-		filePanel.setLayout(new BoxLayout(filePanel, BoxLayout.PAGE_AXIS));
-		//this.note = new JTextField("No Files Selected");
-		//filePanel.add(note);
+		this.filePanel.setLayout(new BoxLayout(filePanel, BoxLayout.PAGE_AXIS));
+		this.updateFilePanel();
 		
 		commandPanel.setLayout(new FlowLayout());
 		commandPanel.setPreferredSize(new Dimension(xPixels-20, yPixels-450));
@@ -83,15 +82,21 @@ public class ParsingJPanel extends JPanel {
 	// -------------------------------
 	
 	private void updateFilePanel() {
-		for (int i=0; i<this.radioButtons.size(); i++) {
-			JPanel row = new JPanel();
-			row.setLayout(new BoxLayout(row, BoxLayout.LINE_AXIS));
+		if (this.radioButtons.size() > 0) {
+			for (int i=0; i<this.radioButtons.size(); i++) {
+				JPanel row = new JPanel();
+				row.setLayout(new BoxLayout(row, BoxLayout.LINE_AXIS));
 			
-			row.add(this.radioButtons.get(i));
-			row.add(Box.createRigidArea(new Dimension(25,0)));
-			row.add(this.fileButtons.get(i));
+				row.add(this.radioButtons.get(i));
+				row.add(Box.createRigidArea(new Dimension(25,0)));
+				row.add(this.fileButtons.get(i));
 			
-			this.filePanel.add(row);
+				this.filePanel.add(row);
+			}
+		} else {
+			this.note = new JLabel("No Files Selected", JLabel.CENTER);
+		    this.note.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		    this.filePanel.add(note);
 		}
 	}
 	
@@ -120,6 +125,7 @@ public class ParsingJPanel extends JPanel {
 		this.fileButtons.add(nb);
 		
 		// Update JPanel
+		this.filePanel.remove(this.note);
 		this.updateFilePanel();
 		this.filePanel.revalidate();
 		this.filePanel.repaint();
@@ -132,6 +138,7 @@ public class ParsingJPanel extends JPanel {
 		this.radioButtons.clear();
 		
 		this.filePanel.removeAll();
+		this.updateFilePanel();
 		this.filePanel.revalidate();
 		this.filePanel.repaint();
 	}
