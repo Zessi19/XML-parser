@@ -3,7 +3,7 @@
 ## Linkit
 
 * Sovelluksen tila: [weeklyUpdates:](https://github.com/Zessi19/XML-parser/tree/main/documentation/weeklyUpdates.md)
-* Käyttöopas: (myöhemmin)
+* Käyttöopas: src/appData/guide.html
 
 ## Sovelluksen kuvaus
 
@@ -26,7 +26,7 @@ Kun käyttäjä valtsee levyltä tiedoston, tiedosto ilmestyy tiedostojen perusn
 * **HtmlJPanel:** HTML-tiedosto näyttäminen, esim. Help -> User Guide
 * **ParsingJPanel:** Sovelluksen päänäkymä: tiedostojen avaaminen, parsinnan käskytys, valitun tiedoston poisto
 * **XmlDom** Parsii XML-tiedoston DOM objektiksi, sisältää parsinta metodit, output HTML Stringinä
-* **DataJFrane** Parametrina annetun datan näyttäminen uudessa ikkunassa (Java File object tai HTML String)
+* **DataJFrame** Parametrina annetun datan näyttäminen uudessa ikkunassa (Java File object tai HTML String)
 
 ## ~~Avoimet kysymykset~~
 
@@ -42,6 +42,6 @@ Kun käyttäjä valtsee levyltä tiedoston, tiedosto ilmestyy tiedostojen perusn
 
 * **Week 5.:** ~~Java AWT/Swing tutustuminen, GUI runko, Suunnitelma~~ OK
 * **Week 6.:** ~~XML tiedoston valitseminen levyltä ja valinnan poisto, Tärkeimmät parserointi toiminnallisuudet, XML tiedoston näyttäminen GUI:ssa~~ OK
-* **Week 7.:** Puuttuvat lisätoiminnallisuudet, koodin refaktorointi ja kommentointi
+* **Week 7.:** ~~Puuttuvat lisätoiminnallisuudet, koodin refaktorointi ja kommentointi~~ OK
 * **Week 8.:** Hienosäätö, Demo
 * **Week 9.:** Tarvittaessa
