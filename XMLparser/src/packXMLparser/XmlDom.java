@@ -149,7 +149,7 @@ public class XmlDom {
 	        			sums[0] += Double.parseDouble(debitList.item(j).getTextContent());
 	        		}
 	        	}
-	        } 
+	        }
 		}
 		
 		return sums;

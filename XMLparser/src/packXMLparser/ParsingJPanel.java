@@ -21,16 +21,16 @@ public class ParsingJPanel extends JPanel {
 	private static final long serialVersionUID = 358722791501541073L;
 	private int selected;
 	
-	private JLabel note;
-	private JPanel filePanel, commandPanel;
-	private JButton runButton, deleteButton;
-	private JScrollPane jScrollPane;
+	public JLabel note;
+	public JPanel filePanel, commandPanel;
+	public JButton runButton, deleteButton;
+	public JScrollPane jScrollPane;
+	public ButtonGroup radioGroup;
 	
 	private List<File> fileList;
 	private List<XmlDom> domList;
 	private List<JButton> fileButtons;
 	private List<JRadioButton> radioButtons;
-	private ButtonGroup radioGroup;
 	
 	public ParsingJPanel(int xPixels, int yPixels) {
 		this.fileList = new ArrayList<File>();

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<root>
+	<credit>1000.00</credit>
+	<debit>-1000.00</debit>
+	<credit>100.00</credit>
+	<debit>-100.00</debit>
+	<credit>10.00</credit>
+	<credit>1.00</credit>
+	<credit>0.01</credit>
+	<credit>0.10</credit>
+</root>

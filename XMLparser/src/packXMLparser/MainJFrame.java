@@ -84,15 +84,15 @@ public class MainJFrame extends JFrame {
 		
 		// Add ActionListeners and Key Mappings
 		this.showItem.addActionListener(this.showAction);
-		this.getRootPane().getInputMap().put(KeyStroke.getKeyStroke('s'), "press_s");
+		this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('s'), "press_s");
 		this.getRootPane().getActionMap().put("press_s", this.showAction);
 		
 		this.addItem.addActionListener(this.addAction);
-		this.getRootPane().getInputMap().put(KeyStroke.getKeyStroke('a'), "press_a");
+		this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('a'), "press_a");
 		this.getRootPane().getActionMap().put("press_a", this.addAction);
 		
 		this.removeItem.addActionListener(this.removeAction);
-		this.getRootPane().getInputMap().put(KeyStroke.getKeyStroke("BACK_SPACE"), "press_bs");
+		this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("BACK_SPACE"), "press_bs");
 		this.getRootPane().getActionMap().put("press_bs", this.removeAction);
 		
 		this.guideItem.addActionListener(this.guideAction);
@@ -169,8 +169,8 @@ public class MainJFrame extends JFrame {
 		private static final long serialVersionUID = 5262577173914800374L;
 		@Override
 	    public void actionPerformed(ActionEvent e) {
-			guidePanel.setVisible(true);
 			parsingPanel.setVisible(false);
+			guidePanel.setVisible(true);
 			keybindsPanel.setVisible(false);
 	    }
 	}
@@ -179,46 +179,9 @@ public class MainJFrame extends JFrame {
 		private static final long serialVersionUID = -8707077341205677148L;
 		@Override
 	    public void actionPerformed(ActionEvent e) {
-			keybindsPanel.setVisible(true);
 			guidePanel.setVisible(false);			
 			parsingPanel.setVisible(false);
+			keybindsPanel.setVisible(true);
 	    }
 	}
 }
-	
-	// Old
-	
-	// Listeners
-	//showItem.addActionListener(this);
-	//addItem.addActionListener(this);
-	//removeItem.addActionListener(this);
-	//guideItem.addActionListener(this);
-	//keybindsItem.addActionListener(this);
-	
-	/*
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-		if (e.getSource() == showItem) {
-			this.setVisible(true);
-			this.guidePanel.hide();
-			this.keybindsPanel.hide();
-		
-		} else if (e.getSource() == addItem) {
-			this.selectFile();
-		
-		} else if (e.getSource() == removeItem) {
-			this.parsingPanel.removeFiles();
-			
-		} else if (e.getSource() == guideItem) {
-			this.guidePanel.show();
-			this.keybindsPanel.hide();
-			this.parsingPanel.setVisible(false);
-			
-		} else if (e.getSource() == keybindsItem) {
-			this.keybindsPanel.show();
-			this.guidePanel.hide();			
-			this.parsingPanel.setVisible(false);
-		}
-	}
-	*/
