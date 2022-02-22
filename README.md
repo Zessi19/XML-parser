@@ -15,7 +15,9 @@ Help valikon kautta käyttäjälle aukeaa kaksi näkymää: "User Guide" ja "Key
 
 Kun käyttäjä valtsee levyltä tiedoston, tiedosto ilmestyy tiedostojen perusnäkymään. Jokaisen tiedoston vieressä on "radio button" ja tiedostoa klikkaamalla XML dokumentti aukeaa uuteen ikkunaan. Jokaisella tiedostolla on myös painike, jolla pelkästään kyseinen tiedosto voidaan poistaa tiedostolistasta. Kun käyttäjä painaa "Run parser" nappia, ohjelma suorittaa valitun tiedoston parsinnan ja näyttää Credit/Debit summan käyttäjälle (total sum sekä summat kuukausittain eriteltynä). Parseroinnin tulos esitetään joko uudessa ikkunassa tai sisällyttää tiedostojen perusnäkymään (päätetään myöhemmin).
 
-(Tarkka selvitys XML tiedoston parsinnasta lisätään tähän viikolla 6. tai viikolla 7.)
+**Edit:** XML-tiedoston parsinta suoritetaan Java org.w3c.dom kirjaston avulla. Kirjasto vaatii, että dokumentti-puuta muodostettaessa tiedostolla on yksi juuri-node. Esimerkki tiedostoissa (/src/testData/) juuri-node on nimetty \<root\>, mutta sovellus toimii vapaavalintaisella nimellä. Parsittaviin tiedostoihin voidaan lisätä positiivisia summia \<credit\> nodella ja negatiivisia summia \<debit\> nodella. Credit ja debit summat voidaan lisäksi sijoittaa \<month number="3"\> noden alle, missä number-attribuutti "3" tarkoittaa kuun numeroa, tässä tapauksesa maaliskuuta.
+
+Kun käyttäjä painaa Run Parser nappia, laskee sovellus kolme "Total" summaa: kaikkien credit ja debit nodejen summan, kaikkien number-attribuutillisten credit ja debit nodejen summan, ja kaikkien itsenäisten credit ja debit nodejen summan (1. summa = 2. summa + 3. summa). Toisessa näkymässä sovellus näyttää kokonais credit ja debit summan jokaiselle kuukaudelle. Näkymään on lisätty myös "Invalid month" sarake, joka sisältää number attribuutti arvot, jotka eivät kuulu suljetulle välille [1,12].
 
 ## Luokkakaavio
 
