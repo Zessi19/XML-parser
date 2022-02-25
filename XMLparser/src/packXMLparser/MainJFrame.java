@@ -38,7 +38,7 @@ public class MainJFrame extends JFrame {
 	public MainJFrame() {
 		// SetUp Frame
 		this.setupFrame();
-		
+		  
 		// File Chooser
 		this.jFileChooser = new JFileChooser(System.getProperty("user.dir"));
 		this.jFileChooser.setMultiSelectionEnabled(true);

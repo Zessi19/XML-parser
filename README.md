@@ -45,5 +45,4 @@ Kun käyttäjä painaa Run Parser nappia, laskee sovellus kolme "Total" summaa: 
 * **Week 5.:** ~~Java AWT/Swing tutustuminen, GUI runko, Suunnitelma~~ OK
 * **Week 6.:** ~~XML tiedoston valitseminen levyltä ja valinnan poisto, Tärkeimmät parserointi toiminnallisuudet, XML tiedoston näyttäminen GUI:ssa~~ OK
 * **Week 7.:** ~~Puuttuvat lisätoiminnallisuudet, koodin refaktorointi ja kommentointi~~ OK
-* **Week 8.:** Hienosäätö, Demo
-* **Week 9.:** Tarvittaessa
+* **Week 8.:** ~~Hienosäätö, Demo~~
