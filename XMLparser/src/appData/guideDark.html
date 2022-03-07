@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<h1 style="color:rgb(159, 200, 240)">User Guide</h1>
+		
+        <h2  style="color:rgb(159, 200, 240)">Menu bar functions</h2>
+         
+        <ul>
+        	<li style="color:rgb(159, 200, 240)"><b>Files</b></li>
+        	<ul> 
+      			<li style="color:rgb(159, 200, 240)"><b>Show All</b> = Show selected files view</li>
+      			<li style="color:rgb(159, 200, 240)"><b>Add New</b> = Add files from disk (use CTRL to select multiple)</li>
+      			<li style="color:rgb(159, 200, 240)"><b>Remove All</b> = Remove all selected files</li>
+    		</ul>
+    		<li style="color:rgb(159, 200, 240)"><b>Help</b></li>
+    		<ul>
+    			<li style="color:rgb(159, 200, 240)"><b>User Guide</b> = Show user guide view</li>
+    			<li style="color:rgb(159, 200, 240)"><b>Keybinds</b> = Show keybinds view</li>
+    		</ul>	
+        </ul>
+        
+        <h2 style="color:rgb(159, 200, 240)">Parser commands (Show All)</h2>
+        
+        <ul>
+        	<li style="color:rgb(159, 200, 240)"><b>File schema</b></li>
+        	<ul>
+      			<li style="color:rgb(159, 200, 240)">
+      			The program parses XML files with the following schema. The first line may include optional tag "?xml version='1.0'?".
+      			All other data must be enclosed inside a <b>root</b> node, which is named, for example, "root". Inside root node, <b>credit</b> 
+      			and <b>debit</b> nodes can be placed freely and they can be placed inside month node with <b>attribute number</b> = String(Integer).
+      			Check src/testData files for reference.
+      			</li>
+    		</ul>
+    		
+    		<li style="color:rgb(159, 200, 240)"><b>Running Parser</b></li>
+    		<ul>
+    			<li style="color:rgb(159, 200, 240)">
+    			After adding files form a disk to the files view, user may browse through the files and open them by pressing a button 
+    			named after the file. To parse a file, user must select the corresponding radio button next to filename and then press 
+    			"Run Parser"" button at the bottom. Similarly, user can delete single selected file by pressing "Delete File" button.
+    			</li>
+        	</ul>
+        	
+        	<li style="color:rgb(159, 200, 240)"><b>Parsing results</b></li>
+    		<ul>
+    			<li style="color:rgb(159, 200, 240)">
+    			Total Balance includes three figures. First value indicates the total sum all credit and debit values in the file, whether or not they 
+    			have given a month attribute. The Second value indicates the total sum of cases with a month attribute value and the third value the total sum of 
+    			cases without the month attribute. Therefore the sum of the second and the third value should be equal to the first value. 
+    			</li>
+    			<li style="color:rgb(159, 200, 240)">
+    			Finally, the total sums of credit and debit values of each month are shown. An invalid month contains values outside the closed interval [1,12].
+    			However, making the month attribute not a string presentation of integer will cause an error to the program.
+    			</li>
+        	</ul>     
+        </ul>
+                
+  	</body>
+ </html>

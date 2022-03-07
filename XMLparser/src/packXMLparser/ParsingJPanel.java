@@ -7,12 +7,15 @@ import java.util.ArrayList;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
+import javax.swing.border.Border;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.BoxLayout;
@@ -20,6 +23,9 @@ import javax.swing.BoxLayout;
 public class ParsingJPanel extends JPanel {
 	private static final long serialVersionUID = 358722791501541073L;
 	private int selected;
+	private boolean darkMode;
+	private Color jPanelBack, buttonBack, buttonFore;
+	private Border jScrollBaneBorder, buttonBorder;
 	
 	public JLabel note;
 	public JPanel filePanel, commandPanel;
@@ -32,7 +38,7 @@ public class ParsingJPanel extends JPanel {
 	private List<JButton> fileButtons;
 	private List<JRadioButton> radioButtons;
 	
-	public ParsingJPanel(int xPixels, int yPixels) {
+	public ParsingJPanel() {		
 		this.fileList = new ArrayList<File>();
 		this.domList = new ArrayList<XmlDom>();
 		this.fileButtons = new ArrayList<JButton>();
@@ -44,13 +50,13 @@ public class ParsingJPanel extends JPanel {
 		
 		// SetUp JPanel Layouts
 		this.setLayout(new BorderLayout());
-		this.setPreferredSize(new Dimension(xPixels-20, yPixels-70));
+		this.setPreferredSize(new Dimension(ConstantValues.xPixelsLarge-20, ConstantValues.yPixelsLarge-70));
 		
 		this.filePanel.setLayout(new BoxLayout(filePanel, BoxLayout.PAGE_AXIS));
 		this.updateFilePanel();
 		
 		commandPanel.setLayout(new FlowLayout());
-		commandPanel.setPreferredSize(new Dimension(xPixels-20, yPixels-450));
+		commandPanel.setPreferredSize(new Dimension(ConstantValues.xPixelsLarge-20, ConstantValues.yPixelsLarge-450));
 		
 		// Add Command Panel Buttons
 		runButton = new JButton("Run Parser");
@@ -71,6 +77,14 @@ public class ParsingJPanel extends JPanel {
 		this.add(jScrollPane, BorderLayout.CENTER);
 		this.add(commandPanel, BorderLayout.PAGE_END);
 		
+		// Save Original Colors and Borders
+		this.jPanelBack = this.getBackground();
+		this.jScrollBaneBorder = this.jScrollPane.getBorder();
+		
+		this.buttonBack = this.runButton.getBackground();
+		this.buttonFore = this.runButton.getForeground();
+		this.buttonBorder = this.runButton.getBorder();
+		
 		// Set Panels Visible
 		filePanel.setVisible(true);
 		commandPanel.setVisible(true);
@@ -86,6 +100,10 @@ public class ParsingJPanel extends JPanel {
 			for (int i=0; i<this.radioButtons.size(); i++) {
 				JPanel row = new JPanel();
 				row.setLayout(new BoxLayout(row, BoxLayout.LINE_AXIS));
+				
+				if (darkMode) {
+					row.setBackground(ConstantValues.darkBlue);
+				}
 			
 				row.add(this.radioButtons.get(i));
 				row.add(Box.createRigidArea(new Dimension(25,0)));
@@ -112,8 +130,10 @@ public class ParsingJPanel extends JPanel {
 		nrb.setName(String.valueOf(radioButtons.size()));
 		nrb.addActionListener( e -> {
 			this.selected = Integer.parseInt(nrb.getName());
-			//System.out.println(selected);
 		});
+		if (darkMode) {
+			nrb.setBackground(ConstantValues.darkBlue);
+		}
 		this.radioButtons.add(nrb);
 		
 		// Set JButton
@@ -122,6 +142,10 @@ public class ParsingJPanel extends JPanel {
 		nb.addActionListener( e -> {
 			this.openXMLfile(Integer.parseInt(nb.getName()));
 		});
+		if (darkMode) {
+			nb.setBackground(ConstantValues.grey);
+			nb.setForeground(ConstantValues.white);
+		}
 		this.fileButtons.add(nb);
 		
 		// Update JPanel
@@ -145,7 +169,7 @@ public class ParsingJPanel extends JPanel {
 	
 	private void openXMLfile(int nElement) {
 		File file = this.fileList.get(nElement);
-		DataJFrame newFrame = new DataJFrame(file);
+		DataJFrame newFrame = new DataJFrame(file, this.darkMode);
 	}
 	
 	private void runParser() {
@@ -172,6 +196,66 @@ public class ParsingJPanel extends JPanel {
 		this.updateFilePanel();
 		this.filePanel.revalidate();
 		this.filePanel.repaint();
+	}
+	
+	public void setDarkMode() {
+		this.darkMode = true;
+		
+		this.setBackground(ConstantValues.darkBlue);
+		this.filePanel.setBackground(ConstantValues.darkBlue);
+		this.commandPanel.setBackground(ConstantValues.grey);
+		this.jScrollPane.setBorder(ConstantValues.darkBlueBorder);
+		
+		this.runButton.setBackground(ConstantValues.darkBlue);
+		this.deleteButton.setBackground(ConstantValues.darkBlue);
+		
+		this.runButton.setForeground(ConstantValues.white);
+		this.deleteButton.setForeground(ConstantValues.white);
+		this.note.setForeground(ConstantValues.white);
+		
+		this.runButton.setBorder(ConstantValues.darkBlueBorderLarge);
+		this.deleteButton.setBorder(ConstantValues.darkBlueBorderLarge);
+		
+		for (JButton e : this.fileButtons) {
+			e.setBackground(ConstantValues.grey);
+			e.setForeground(ConstantValues.white);
+		}
+		for (JRadioButton e : this.radioButtons) {
+			e.setBackground(ConstantValues.darkBlue);
+		}
+		for (Component e : this.filePanel.getComponents()) {
+			e.setBackground(ConstantValues.darkBlue);
+		}		
+	}
+	
+	public void setLightMode() {
+		this.darkMode = false;
+		
+		this.setBackground(this.jPanelBack);
+		this.filePanel.setBackground(this.jPanelBack);
+		this.commandPanel.setBackground(this.jPanelBack);
+		
+		this.runButton.setBackground(this.buttonBack);
+		this.runButton.setForeground(this.buttonFore);
+		this.runButton.setBorder(this.buttonBorder);
+		
+		this.deleteButton.setBackground(this.buttonBack);
+		this.deleteButton.setForeground(this.buttonFore);
+		this.deleteButton.setBorder(this.buttonBorder);
+		
+		this.note.setForeground(this.buttonFore);
+		this.jScrollPane.setBorder(this.jScrollBaneBorder);
+		
+		for (JButton e : this.fileButtons) {
+			e.setBackground(this.buttonBack);
+			e.setForeground(this.buttonFore);
+		}
+		for (JRadioButton e : this.radioButtons) {
+			e.setBackground(this.buttonBack);
+		}
+		for (Component e : this.filePanel.getComponents()) {
+			e.setBackground(this.jPanelBack);
+		}	
 	}
 	
 }
