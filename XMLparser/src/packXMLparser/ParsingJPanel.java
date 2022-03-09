@@ -167,16 +167,29 @@ public class ParsingJPanel extends JPanel {
 		this.filePanel.repaint();
 	}
 	
-	private void openXMLfile(int nElement) {
-		File file = this.fileList.get(nElement);
-		DataJFrame newFrame = new DataJFrame(file, this.darkMode);
+	private void openXMLfile(int iElement) {
+		File file = this.fileList.get(iElement);
+		
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() { 
+				FileJFrame newFrame = new FileJFrame(file, darkMode);
+				newFrame.setLocationRelativeTo(null);
+				newFrame.setVisible(true);
+			}
+		});
 	}
 	
 	private void runParser() {
 		String fname = "Results: " + this.domList.get(this.selected).getFilename();
 		String html = this.domList.get(this.selected).outputHTML();
 		
-		DataJFrame newFrame = new DataJFrame(fname, html);
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() { 
+				resultJFrame newFrame = new resultJFrame(fname, html);
+				newFrame.setLocationRelativeTo(null);
+				newFrame.setVisible(true);
+			}
+		});
 	}
 	
 	private void deleteSelected() {

@@ -7,29 +7,34 @@ import java.awt.Image;
 
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
-import javax.swing.JEditorPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.JScrollPane;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import javax.swing.text.BadLocationException;
 import javax.swing.JOptionPane;
 
-public class DataJFrame extends JFrame {
+public class FileJFrame extends JFrame {
 	private static final long serialVersionUID = 7526472295622776147L;
 	private JTextPane jTextPane;
-	private JEditorPane jEditorPane;
 	private JScrollPane jScrollPane;
 	
-	// Constructor 1. (Show XML File)
-	public DataJFrame(File file, boolean darkMode) {
+	public FileJFrame(File file, boolean darkMode) {
 		String content = "";
 		
-		// Setup Frame parameters
-		this.setupFrame(file.getName());
+		// Set Frame
+		this.setTitle(file.getName());
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setSize(ConstantValues.xPixels, ConstantValues.yPixels);
+				
+		// Set Logo
+		ImageIcon logo = new ImageIcon("src/appData/logo_small.png");
+		Image scaledLogo = logo.getImage().getScaledInstance(120,120,java.awt.Image.SCALE_SMOOTH);
+		ImageIcon newLogo = new ImageIcon(scaledLogo);
+		this.setIconImage(newLogo.getImage());
 		
-		// Setup JTextPane + Styles
+		// Set JTextPane + Styles
 		this.jTextPane = new JTextPane();
 		this.jTextPane.setEditable(false);
         StyledDocument doc = this.jTextPane.getStyledDocument();
@@ -61,48 +66,17 @@ public class DataJFrame extends JFrame {
 		this.jScrollPane = new JScrollPane(this.jTextPane);
 		this.add(this.jScrollPane);
 		
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() { 
+				jScrollPane.getVerticalScrollBar().setValue(0);
+			}
+		});
+		
 		if (darkMode) {
 			this.jTextPane.setBackground(ConstantValues.darkBlue);
 			this.jScrollPane.setBackground(ConstantValues.darkBlue);
 			this.setBackground(ConstantValues.darkBlue);
 		}
-		
-		// Set location and visibility
-		this.setLocationRelativeTo(null);
-		this.setVisible(true);
-	}
-	
-	// Constructor 2. (Show Parsing Results HTML String)
-	public DataJFrame(String fname, String html) {
-		this.setupFrame(fname);
-		
-		// Set Input Text		
-	    this.jEditorPane = new JEditorPane();
-		this.jEditorPane.setEditable(false);
-		
-		this.jEditorPane.setContentType("text/html");
-		this.jEditorPane.setText(html);
-		
-		// Add Scroll bar 
-		this.jScrollPane = new JScrollPane(jEditorPane);
-		this.add(this.jScrollPane);
-				
-		// Set location and visibility
-		this.setLocationRelativeTo(null);
-		this.setVisible(true);
-	}
-	
-	// Frame setup
-	private void setupFrame(String filename) {
-		this.setTitle(filename);
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setSize(ConstantValues.xPixels, ConstantValues.yPixels);
-				
-		// Set Logo
-		ImageIcon logo = new ImageIcon("src/appData/logo_small.png");
-		Image scaledLogo = logo.getImage().getScaledInstance(120,120,java.awt.Image.SCALE_SMOOTH);
-		ImageIcon newLogo = new ImageIcon(scaledLogo);
-		this.setIconImage(newLogo.getImage());
 	}
 	
 }
