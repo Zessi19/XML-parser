@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<root>
+	<month number="-1">
+		<credit>100.00</credit>
+	</month>
+	<month number="1">
+		<credit>100.00</credit>
+	</month>
+	<month number="2">
+		<credit>100.00</credit>
+	</month>
+	<month number="3">
+		<credit>100.00</credit>
+	</month>
+	<month number="4">
+		<credit>100.00</credit>
+	</month>
+	<month number="5">
+		<credit>100.00</credit>
+	</month>
+	<month number="6">
+		<credit>100.00</credit>
+	</month>
+	<month number="7">
+		<credit>100.00</credit>
+	</month>
+	<month number="8">
+		<credit>100.00</credit>
+	</month>
+	<month number="9">
+		<credit>100.00</credit>
+	</month>
+	<month number="10">
+		<credit>100.00</credit>
+	</month>
+	<month number="11">
+		<credit>100.00</credit>
+	</month>
+	<month number="12">
+		<credit>100.00</credit>
+	</month>
+		<credit>100.00</credit>
+</root>

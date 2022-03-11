@@ -20,7 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Image;
-
+ 
 public class MainJFrame extends JFrame {
 	private static final long serialVersionUID = -157886601035491334L;
 	

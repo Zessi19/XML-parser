@@ -116,7 +116,7 @@ public class XmlDom {
 	    return total;
 	}
 	
-	private double[] getBalanceByMonth() {
+	public double[] getBalanceByMonth() {
 		double[] sums = new double[13];
 		
 		// Get <month> NodeList

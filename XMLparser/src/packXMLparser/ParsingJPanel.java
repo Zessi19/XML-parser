@@ -180,12 +180,17 @@ public class ParsingJPanel extends JPanel {
 	}
 	
 	private void runParser() {
-		String fname = "Results: " + this.domList.get(this.selected).getFilename();
-		String html = this.domList.get(this.selected).outputHTML();
+		XmlDom targetDom = this.domList.get(this.selected);
+		
+		String fname = "Results: " + targetDom.getFilename();
+		String html = targetDom.outputHTML();
+		
+		double[] sums = targetDom.getBalanceByMonth();
+		double totalSum = targetDom.getBalance();
 		
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() { 
-				resultJFrame newFrame = new resultJFrame(fname, html);
+				resultJFrame newFrame = new resultJFrame(fname, html, sums, totalSum);
 				newFrame.setLocationRelativeTo(null);
 				newFrame.setVisible(true);
 			}
