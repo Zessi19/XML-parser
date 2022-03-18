@@ -29,7 +29,7 @@ public class MainJFrame extends JFrame {
 	private JMenu fileMenu, helpMenu, settingsMenu;
 	private JMenuItem showItem, addItem, removeItem, guideItem, keybindsItem, lightItem, darkItem;
 	private List<JMenuItem> menuItems;
-	private List<JMenu> menus; 
+	private List<JMenu> menus;
 	
 	// Panels
 	public ParsingJPanel parsingPanel;

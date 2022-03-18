@@ -183,14 +183,13 @@ public class ParsingJPanel extends JPanel {
 		XmlDom targetDom = this.domList.get(this.selected);
 		
 		String fname = "Results: " + targetDom.getFilename();
-		String html = targetDom.outputHTML();
-		
 		double[] sums = targetDom.getBalanceByMonth();
 		double totalSum = targetDom.getBalance();
+		String[][] dataTable = targetDom.getDataTable();
 		
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() { 
-				resultJFrame newFrame = new resultJFrame(fname, html, sums, totalSum);
+				resultJFrame newFrame = new resultJFrame(fname, sums, totalSum, dataTable);
 				newFrame.setLocationRelativeTo(null);
 				newFrame.setVisible(true);
 			}
