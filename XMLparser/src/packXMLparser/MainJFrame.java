@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import javax.swing.border.Border;
@@ -20,14 +21,34 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Image;
- 
-public class MainJFrame extends JFrame {
+
+/*
+## Class implements the main JFrame of the program. ##
+## Features:
+	- MenuBar
+	- Three extended JPanels (ParsingPanel + 2x HtmlJPanel)
+	- Action Subclasses for MenuBar ActionListeners (needed for keybinds implementation)
+
+	-Private Methods
+		* void setupFrame()
+		* void selectFile()
+	-Public Classes
+		* void setDarkMode()
+		* void setLightMode()
+*/
+
+public class MainJFrame extends JFrame {	
+	// ----------------------
+	//     Class Variables
+	// ----------------------
+	
+	// Eclipse recommendation
 	private static final long serialVersionUID = -157886601035491334L;
 	
-	// Menu items
+	// JMenuBars, JMenus, JMenuItems and JMenu & JMenuItem Lists
 	private JMenuBar menubar;
 	private JMenu fileMenu, helpMenu, settingsMenu;
-	private JMenuItem showItem, addItem, removeItem, guideItem, keybindsItem, lightItem, darkItem;
+	private JMenuItem showItem, addItem, removeItem, guideItem, keybindsItem, webItem, lightItem, darkItem;
 	private List<JMenuItem> menuItems;
 	private List<JMenu> menus;
 	
@@ -37,14 +58,18 @@ public class MainJFrame extends JFrame {
 	private JFileChooser jFileChooser;
 	
 	// Actions
-	private Action showAction, addAction, removeAction, guideAction, keybindsAction, darkModeAction, lightModeAction;
+	private Action showAction, addAction, removeAction, guideAction, keybindsAction, webAction, darkModeAction, lightModeAction;
 	
 	// Colors and Borders
 	private Border menubarBorder, menuBorder, popupMenuBorder, menuItemBorder;
 	private Color menubarBack, menuFore, menuBack, menuItemFore, menuItemBack, background;
 	
+	// -------------------
+	//     Constructor
+	// -------------------
+	
 	public MainJFrame() {
-		// SetUp Frame
+		// Private method
 		this.setupFrame();
 		  
 		// File Chooser
@@ -58,9 +83,9 @@ public class MainJFrame extends JFrame {
 		this.settingsMenu = new JMenu("Settings");
 		
 		this.menus = new ArrayList<JMenu>();
-		this.menus.add(fileMenu);
-		this.menus.add(helpMenu);
-		this.menus.add(settingsMenu);
+		this.menus.add(this.fileMenu);
+		this.menus.add(this.helpMenu);
+		this.menus.add(this.settingsMenu);
 		
 		// Create Menu Items
 		this.showItem = new JMenuItem("Show All");
@@ -68,52 +93,59 @@ public class MainJFrame extends JFrame {
 		this.removeItem = new JMenuItem("Remove All");
 		this.guideItem = new JMenuItem("User Guide");
 		this.keybindsItem = new JMenuItem("Keybinds");
+		this.webItem = new JMenuItem("What's XML file");
 		this.darkItem = new JMenuItem("Dark Mode");
 		this.lightItem = new JMenuItem("Light Mode");
 		
+		// Add JMenuItems to List
 		this.menuItems = new ArrayList<JMenuItem>();
-		this.menuItems.add(showItem);
-		this.menuItems.add(addItem);
-		this.menuItems.add(removeItem);
-		this.menuItems.add(guideItem);
-		this.menuItems.add(keybindsItem);
-		this.menuItems.add(darkItem);
-		this.menuItems.add(lightItem);
+		this.menuItems.add(this.showItem);
+		this.menuItems.add(this.addItem);
+		this.menuItems.add(this.removeItem);
+		this.menuItems.add(this.guideItem);
+		this.menuItems.add(this.keybindsItem);
+		this.menuItems.add(this.webItem);
+		this.menuItems.add(this.darkItem);
+		this.menuItems.add(this.lightItem);
 		
 		// Build Menu Bar
-		this.fileMenu.add(showItem);
-		this.fileMenu.add(addItem);
-		this.fileMenu.add(removeItem);
+		this.fileMenu.add(this.showItem);
+		this.fileMenu.add(this.addItem);
+		this.fileMenu.add(this.removeItem);
 		
-		this.helpMenu.add(guideItem); 
-		this.helpMenu.add(keybindsItem);
-		this.settingsMenu.add(darkItem);
-		this.settingsMenu.add(lightItem);
+		this.helpMenu.add(this.guideItem);
+		this.helpMenu.add(this.keybindsItem);
+		this.helpMenu.add(this.webItem);
 		
-		this.menubar.add(fileMenu);
-		this.menubar.add(helpMenu);
-		this.menubar.add(settingsMenu);
-		this.setJMenuBar(menubar);
+		this.settingsMenu.add(this.darkItem);
+		this.settingsMenu.add(this.lightItem);
 		
-		// JPanels
+		this.menubar.add(this.fileMenu);
+		this.menubar.add(this.helpMenu);
+		this.menubar.add(this.settingsMenu);
+		this.setJMenuBar(this.menubar);
+		
+		// Create Panels
 		this.parsingPanel = new ParsingJPanel();
 		this.guidePanel = new HtmlJPanel("guide.html", "guideDark.html");
 		this.keybindsPanel = new HtmlJPanel("keybinds.html", "keybindsDark.html");
 		
+		// Add Panels to JFrame
 		this.getContentPane().add(this.parsingPanel);
 		this.getContentPane().add(this.guidePanel);
 		this.getContentPane().add(this.keybindsPanel);
 		
-		// Setup Actions
+		// Create Actions
 		this.showAction = new showAction();
 		this.addAction = new addAction();
 		this.removeAction = new removeAction();
 		this.guideAction = new guideAction();
 		this.keybindsAction = new keybindsAction();
+		this.webAction = new webAction();
 		this.darkModeAction = new darkModeAction();
 		this.lightModeAction = new lightModeAction();
 		
-		// Add ActionListeners and Key Mappings
+		// Add ActionsListeners to JMenuItems, Add Key Mappings
 		this.showItem.addActionListener(this.showAction);
 		this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('s'), "press_s");
 		this.getRootPane().getActionMap().put("press_s", this.showAction);
@@ -134,6 +166,10 @@ public class MainJFrame extends JFrame {
 		this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('k'), "press_k");
 		this.getRootPane().getActionMap().put("press_k", this.keybindsAction);
 		
+		this.webItem.addActionListener(this.webAction);
+		this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('w'), "press_w");
+		this.getRootPane().getActionMap().put("press_w", this.webAction);
+		
 		this.lightItem.addActionListener(this.lightModeAction);
 		this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('1'), "press_1");
 		this.getRootPane().getActionMap().put("press_1", this.lightModeAction);
@@ -147,26 +183,26 @@ public class MainJFrame extends JFrame {
 		this.menubarBorder = this.menubar.getBorder();
 		this.background = this.getContentPane().getBackground();
 		
-		for (JMenu e: this.menus) {
-			this.menuFore = e.getForeground();
-			this.menuBack = e.getBackground();
-			this.menuBorder = e.getBorder();
-			this.popupMenuBorder = e.getPopupMenu().getBorder();
-		}
-		
-		for (JMenuItem e : this.menuItems) {
-			this.menuItemFore = e.getForeground();
-			this.menuItemBack = e.getBackground();
-			this.menuItemBorder = e.getBorder();
-		}
-		
+		this.menuFore = this.menus.get(0).getForeground();
+		this.menuBack = this.menus.get(0).getBackground();
+		this.menuBorder = this.menus.get(0).getBorder();
+		this.popupMenuBorder = this.menus.get(0).getPopupMenu().getBorder();
+			
+		this.menuItemFore = this.menuItems.get(0).getForeground();
+		this.menuItemBack = this.menuItems.get(0).getBackground();
+		this.menuItemBorder = this.menuItems.get(0).getBorder();
 	}
 	
-	// ----------------------------------
-	//    Class Methods and SubClasses
-	// ---------------------------------- 
+	// ---------------------
+	//    Private Methods
+	// ---------------------
 	
-	public void setupFrame() {
+	/*
+	void SetupFrame()
+		- Initializes parameters determining the size, type, layout and
+		  logo of the JFrame
+	 */
+	private void setupFrame() {
 		// Initialize Frame Parameters
 		this.setTitle("XML Parser");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -180,7 +216,12 @@ public class MainJFrame extends JFrame {
 		this.setIconImage(newLogo.getImage());
 	}
 	
-	public void selectFile() {
+	/*
+	void SelectFile()
+		- Select one or multiple files from the computer disk using JFileChooser.
+		  Multiple files can be selected, for example, CTRL + Left Mouse Button
+	 */
+	private void selectFile() {
 		int returnValue = this.jFileChooser.showOpenDialog(null);
 		
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -192,6 +233,14 @@ public class MainJFrame extends JFrame {
 		}
 	}
 	
+	// --------------------
+	//    Public Methods
+	// --------------------
+	
+	/*
+	void SetDarkMode()
+		- Set Component to the Dark mode
+	 */
 	public void setDarkMode() {
 		this.menubar.setOpaque(true);
 		this.menubar.setBackground(ConstantValues.grey);
@@ -215,10 +264,13 @@ public class MainJFrame extends JFrame {
 		
 		this.guidePanel.setDarkMode();
 		this.keybindsPanel.setDarkMode();
-		this.parsingPanel.setDarkMode();
-			
+		this.parsingPanel.setDarkMode();		
 	}
 	
+	/*
+	void SetLightMode()
+		- Set Component to the Light mode
+	*/
 	public void setLightMode() {
 		this.getContentPane().setBackground(this.background);
 		this.menubar.setBackground(this.menubarBack);
@@ -239,11 +291,13 @@ public class MainJFrame extends JFrame {
 		
 		this.guidePanel.setLightMode();
 		this.keybindsPanel.setLightMode();
-		this.parsingPanel.setLightMode();
-		
+		this.parsingPanel.setLightMode();	
 	}
 	
-	// Action SubClasses
+	// --------------------------
+	//    SubClasses (Actions)
+	// --------------------------
+	
 	public class showAction extends AbstractAction {
 		private static final long serialVersionUID = 2514744125519996671L;
 		@Override
@@ -287,6 +341,21 @@ public class MainJFrame extends JFrame {
 			guidePanel.setVisible(false);			
 			parsingPanel.setVisible(false);
 			keybindsPanel.setVisible(true);
+	    }
+	}
+	
+	public class webAction extends AbstractAction {
+		private static final long serialVersionUID = -7004054911875094040L;
+		@Override
+	    public void actionPerformed(ActionEvent e) {
+			String url = "https://en.wikipedia.org/wiki/XML";
+			
+			try {
+				java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
+			} catch (Exception exc) {
+				exc.printStackTrace();
+	        	JOptionPane.showMessageDialog(null, "Cannot open website: " + url, "Infobox", JOptionPane.INFORMATION_MESSAGE);
+			}
 	    }
 	}
 	

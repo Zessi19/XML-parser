@@ -20,24 +20,55 @@ import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.BoxLayout;
 
+/*
+## Class extends JPanel which handles GUI parsing functionality of application ##
+	- 
+
+	- Private methods
+		* void updateFilePanel()
+		* void openXMLfile()
+		* void runParser()
+		* void deleteSelected()
+	- Public methods
+		* void addFile()
+		* void removeFiles()
+		* void SetDarkMode()
+		* void SetLightMode()
+*/
+
 public class ParsingJPanel extends JPanel {
+	// ----------------------
+	//     Class Variables
+	// ----------------------
+	
+	// Eclipse recommendation
 	private static final long serialVersionUID = 358722791501541073L;
+	
+	// Saves current selected radio button iterator in Lists 
 	private int selected;
+	
+	// Dark/Light mode Colors and Borders, darkMode flag variable
 	private boolean darkMode;
 	private Color jPanelBack, buttonBack, buttonFore;
 	private Border jScrollBaneBorder, buttonBorder;
 	
+	// Java Swing Components
 	public JLabel note;
 	public JPanel filePanel, commandPanel;
 	public JButton runButton, deleteButton;
 	public JScrollPane jScrollPane;
 	public ButtonGroup radioGroup;
 	
+	// Memo Lists to later access Swing/Other components
 	private List<File> fileList;
 	private List<XmlDom> domList;
 	private List<JButton> fileButtons;
 	private List<JRadioButton> radioButtons;
 	
+	
+	// -------------------
+	//     Constructor
+	// -------------------
 	public ParsingJPanel() {		
 		this.fileList = new ArrayList<File>();
 		this.domList = new ArrayList<XmlDom>();
@@ -91,10 +122,14 @@ public class ParsingJPanel extends JPanel {
 		this.setVisible(true);
 	}
 	
-	// -------------------------------
-	//   ParsingPanel Class Methods
-	// -------------------------------
+	// ---------------------
+	//    Private Methods
+	// ---------------------
 	
+	/*
+	void UpdateFilePanel()
+		- Redraw all "rows" of (radioButton, fileButton) pairs to this.filePanel
+	 */
 	private void updateFilePanel() {
 		if (this.radioButtons.size() > 0) {
 			for (int i=0; i<this.radioButtons.size(); i++) {
@@ -118,6 +153,80 @@ public class ParsingJPanel extends JPanel {
 		}
 	}
 	
+	/*
+	void OpenXMLfile()
+		- Open iElement-th XML-file in a new JFrame (class FileJFrame)
+	 */
+	private void openXMLfile(int iElement) {
+		File file = this.fileList.get(iElement);
+		
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() { 
+				FileJFrame newFrame = new FileJFrame(file, darkMode);
+				newFrame.setLocationRelativeTo(null);
+				newFrame.setVisible(true);
+			}
+		});
+	}
+	
+	/*
+	void RunParser()
+		- RunParser for selected radio button XML-file (this.selected)
+		- Forms XMLDom object form the targeted XML-file and calls object's
+		  methods to get parsing results
+		- Results shown in a new JFrame (class resultsJFrame)
+	 */
+	private void runParser() {
+		XmlDom targetDom = this.domList.get(this.selected);
+		
+		String fname = "Results: " + targetDom.getFilename();
+		double[] sums = targetDom.getBalanceByMonth();
+		double totalSum = targetDom.getBalance();
+		String[][] dataTable = targetDom.getDataTable();
+		
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() { 
+				resultJFrame newFrame = new resultJFrame(fname, sums, totalSum, dataTable);
+				newFrame.setLocationRelativeTo(null);
+				newFrame.setVisible(true); 
+			}
+		});
+	}
+	
+	/*
+	void DeleteSelected()
+		- Delete selected (radio button) XML-file form user view and memo Lists
+		- All this.filePanel rows are redrawn after deletion
+	 */
+	private void deleteSelected() {
+		this.fileList.remove(this.selected);
+		this.domList.remove(this.selected);
+		
+		this.fileButtons.remove(this.selected);
+		this.radioButtons.remove(this.selected);
+		
+		// Rename button "numbers"
+		for (int i=0; i<radioButtons.size(); i++) {
+			this.radioButtons.get(i).setName(String.valueOf(i));
+			this.fileButtons.get(i).setName(String.valueOf(i));
+		}
+		
+		this.filePanel.removeAll();
+		this.updateFilePanel();
+		this.filePanel.revalidate();
+		this.filePanel.repaint();
+	}
+	
+	// --------------------
+	//    Public Methods
+	// --------------------
+	
+	/*
+	void  AddFile()
+		- Forms XmlDOm from argument File Object
+		- Add added XML-file to user view and save Swing components/XmlDom/File to
+		  memo Lists
+	 */
 	public void addFile(File file) {
 		this.fileList.add(file);
 		this.domList.add(new XmlDom(file));
@@ -155,6 +264,10 @@ public class ParsingJPanel extends JPanel {
 		this.filePanel.repaint();
 	}
 	
+	/*
+	void RemoveFiles()
+		- Removes every File from user view and memo Lists
+	 */
 	public void removeFiles() {
 		this.fileList.clear();
 		this.domList.clear();
@@ -167,54 +280,10 @@ public class ParsingJPanel extends JPanel {
 		this.filePanel.repaint();
 	}
 	
-	private void openXMLfile(int iElement) {
-		File file = this.fileList.get(iElement);
-		
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() { 
-				FileJFrame newFrame = new FileJFrame(file, darkMode);
-				newFrame.setLocationRelativeTo(null);
-				newFrame.setVisible(true);
-			}
-		});
-	}
-	
-	private void runParser() {
-		XmlDom targetDom = this.domList.get(this.selected);
-		
-		String fname = "Results: " + targetDom.getFilename();
-		double[] sums = targetDom.getBalanceByMonth();
-		double totalSum = targetDom.getBalance();
-		String[][] dataTable = targetDom.getDataTable();
-		
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() { 
-				resultJFrame newFrame = new resultJFrame(fname, sums, totalSum, dataTable);
-				newFrame.setLocationRelativeTo(null);
-				newFrame.setVisible(true);
-			}
-		});
-	}
-	
-	private void deleteSelected() {
-		this.fileList.remove(this.selected);
-		this.domList.remove(this.selected);
-		
-		this.fileButtons.remove(this.selected);
-		this.radioButtons.remove(this.selected);
-		
-		// Rename button "numbers"
-		for (int i=0; i<radioButtons.size(); i++) {
-			this.radioButtons.get(i).setName(String.valueOf(i));
-			this.fileButtons.get(i).setName(String.valueOf(i));
-		}
-		
-		this.filePanel.removeAll();
-		this.updateFilePanel();
-		this.filePanel.revalidate();
-		this.filePanel.repaint();
-	}
-	
+	/*
+	void SetDarkMode()()
+		- Set Component to Dark mode
+	 */
 	public void setDarkMode() {
 		this.darkMode = true;
 		
@@ -245,6 +314,10 @@ public class ParsingJPanel extends JPanel {
 		}		
 	}
 	
+	/*
+	void SetLightMode()()
+		- Set Component to Light mode
+	 */
 	public void setLightMode() {
 		this.darkMode = false;
 		

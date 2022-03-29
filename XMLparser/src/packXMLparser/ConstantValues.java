@@ -4,6 +4,15 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
+/*
+## Class includes constant values used in application ##
+	- xPixelLArge, yPixelsLarge
+		* The size of MainJFrame (pixels)
+	- xPixels, yPixels
+		* The size of parsing result JFrame (resultJFrame)
+	- Custom colors are used in Dark Mode
+*/
+
 public final class ConstantValues {
 	// 4:3 Aspect Ratio Frame: 1.2*[480,640] (MainFrame)
 	public static final int xPixelsLarge = 768;

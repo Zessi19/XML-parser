@@ -27,13 +27,37 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
+/*
+## Class extends JFrame which handles showing parsing results in new frame ##
+	- Three results Panels (CardLayout)
+		* HTML list
+		* JTable
+		* Pie Chart (JFreeChart)
+
+	- Private methods
+		* void outputHTML()
+		* void setTab1()
+		* void setTab2()
+		* void setTab3()
+*/
+
 public class resultJFrame extends JFrame {
+	// ----------------------
+	//     Class Variables
+	// ----------------------
+	
+	// Eclipse recommendation
 	private static final long serialVersionUID = 7103983301595358115L;
+	
+	// Months as 3 char strings
 	private String[] months;
+	
+	// CardLayout JPanels, fixed as tabs to JTabbedPane
 	private JPanel tab1, tab2, tab3;
 	
-	final static String BUTTONPANEL = "Card with JButtons";
-	final static String TEXTPANEL = "Card with JTextField";
+	// -------------------
+	//     Constructor
+	// -------------------
 	
 	public resultJFrame(String fname, double[] sums, double totalSum, String[][] dataTable) {
 		// Set Frame
@@ -47,15 +71,17 @@ public class resultJFrame extends JFrame {
 		ImageIcon newLogo = new ImageIcon(scaledLogo);
 		this.setIconImage(newLogo.getImage());
 		
+		// Get English Months
 		DateFormatSymbols dfs = new DateFormatSymbols(Locale.US);
 		this.months = dfs.getShortMonths();
 		
 		JTabbedPane tabbedPane = new JTabbedPane();
 		
+		// Set CarLayout elements
 		this.tab1 = new JPanel();
 		this.tab2 = new JPanel();
 		this.tab3 = new JPanel();
-		
+		  
 		tab1.setLayout(new CardLayout());
 		tab2.setLayout(new CardLayout());
 		tab3.setLayout(new CardLayout());
@@ -64,6 +90,7 @@ public class resultJFrame extends JFrame {
         setTab2(dataTable);
         setTab3(totalSum, sums);
 		
+        // Name tabs
 		tabbedPane.addTab( "Tab 1", tab1 );
         tabbedPane.addTab( "Tab 2", tab2 );
         tabbedPane.addTab( "Tab 3", tab3 );
@@ -71,7 +98,15 @@ public class resultJFrame extends JFrame {
         this.add(tabbedPane, BorderLayout.CENTER );
 	}
 	
-	public String outputHTML(double total, double[] sums) {
+	// ---------------------
+	//    Private Methods
+	// ---------------------
+	
+	/*
+	String OutputHTML()
+		- Form parsing results HTML String, which is given setTab1() as argument
+	 */
+	private String outputHTML(double total, double[] sums) {
 		String output = "";
 
 		DateFormatSymbols dfs = new DateFormatSymbols(Locale.US);
@@ -100,6 +135,10 @@ public class resultJFrame extends JFrame {
 		return output;
 	}
 	
+	/*
+	void setTab1()
+		- Set Tab 1 (JPanel) content, HTML string created by this.outputHTML()
+	 */
 	private void setTab1(String html) {
 		// Add JEditorPane
 		JEditorPane jEditorPane = new JEditorPane();
@@ -112,11 +151,18 @@ public class resultJFrame extends JFrame {
 		this.tab1.add(jScrollPane);
 	}
 	
+	/*
+	void setTab2()
+		- Set Tab 2 (JPanel) content, JTable from argument dataTable
+	 */
 	private void setTab2(String[][] dataTable) {
 		JPanel panel = new JPanel();
+		
+		// JPanel header
 		panel.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createEtchedBorder(), "All Transactions", TitledBorder.CENTER, TitledBorder.TOP));
-		      
+		
+		// Set JTable column names + Create JTable
 		String[] header = { "Type", "Amount", "Month" };      
 		JTable table = new JTable(dataTable, header);
 		
@@ -127,9 +173,16 @@ public class resultJFrame extends JFrame {
 		this.tab2.add(panel);
 	}
 	
+	/*
+	void setTab3()
+		- Set Tab 3 (JPanel) content, Pie chart created by JFreeChart
+		- Pie chart shows abs(Credit + Debit) per month
+			* Absolute value, because chart doesn't support negative values
+	 */
 	private void setTab3(double totalSum, double[] sums) {
 		DefaultPieDataset dataset = new DefaultPieDataset();
 		
+		// Case: No month attribute
 		double noMonth = totalSum - DoubleStream.of(sums).sum();
 		if (Math.abs(noMonth) > 0.001) {
 			String id = "No Month";
@@ -137,6 +190,7 @@ public class resultJFrame extends JFrame {
 			dataset.setValue(id, Math.abs(noMonth));
 		}
 		
+		// Case: Has valid month attribute [1-12]
 		for (int i=0; i<months.length-1; i++) {
 			if (Math.abs(sums[i+1]) > 0.001 ) {
 				String id = months[i];
@@ -145,12 +199,14 @@ public class resultJFrame extends JFrame {
 			}
 		} 
 		
+		// Case: Has invalid month attribute
 		if (Math.abs(sums[0]) > 0.001) {
 			String id = "Invalid Month";
 			if (sums[0] < 0) id += " (Neg)";
 			dataset.setValue(id, Math.abs(sums[0]));
 		}
 		
+		// Crate Pie Chart
 		JFreeChart chart = ChartFactory.createPieChart(
 				"|Credit + Debit| per Month",	// Title 
 		         dataset,	// Data    

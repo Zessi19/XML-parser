@@ -14,6 +14,15 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.JOptionPane;
 
+/*
+## Class implements extended JPanel for guide.html and keybinds.html ##
+	-  Uses JSrollPane -> no HTML-file max size
+	
+	- Public Methods
+		* void setDarkMode()
+		* void SetLightMode()
+*/
+
 public class HtmlJPanel extends JPanel {
 	private static final long serialVersionUID = 1076966878409007128L;
 	private File originalFile, darkFile;
@@ -22,7 +31,6 @@ public class HtmlJPanel extends JPanel {
 	
 	private Color lightEditorPane, lightScrollPane, lightBackground;
 	private Border lightBorder;
-	//private Color uiThumb, uiTrack, uiThumbShadow, uiThumbDarkShadow, uiThumbHighlight;
 	
 	public HtmlJPanel(String fname, String darkFname) {
 	    this.jEditorPane = new JEditorPane();
@@ -65,6 +73,10 @@ public class HtmlJPanel extends JPanel {
         this.lightBorder = this.jScrollPane.getBorder();
 	}
 	
+	/*
+	void SetDarkMode()
+	- Set Component to the Dark mode
+	*/
 	public void setDarkMode() {
 		// Change to DarkMode HTML file
 		try {
@@ -90,6 +102,10 @@ public class HtmlJPanel extends JPanel {
 		this.setBackground(ConstantValues.darkBlue);
 	}
 	
+	/*
+	void SetLightMode()
+		- Set Component to the Light mode
+	*/
 	public void setLightMode() {
 		// Change to LightMode HTML file
 		try {
@@ -109,21 +125,7 @@ public class HtmlJPanel extends JPanel {
 		UIManager.put("ScrollBar.thumbDarkShadow", null);
 		UIManager.put("ScrollBar.thumbHighlight", null);
 		this.jScrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI());
-		
-		/*
-		UIManager.put("ScrollBar.thumb", new ColorUIResource(this.uiThumb));
-		UIManager.put("ScrollBar.track", new ColorUIResource(Color.GREEN));
-		UIManager.put("ScrollBar.thumbShadow", new ColorUIResource(this.uiThumbShadow));
-		UIManager.put("ScrollBar.thumbDarkShadow", new ColorUIResource(this.uiThumbDarkShadow));
-		UIManager.put("ScrollBar.thumbHighlight", new ColorUIResource(this.uiThumbHighlight));
-		this.jScrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI());
-		*/
+
 		this.setBackground(this.lightBackground);
 	}
 }
-
-//this.uiThumb = UIManager.getColor("ScrollBar.thumb");
-//this.uiTrack = UIManager.getColor("ScrollBar.track");
-//this.uiThumbShadow = UIManager.getColor("ScrollBar.thumbShadow");
-//this.uiThumbDarkShadow = UIManager.getColor("ScrollBar.thumbDarkShadow");
-//this.uiThumbHighlight = UIManager.getColor("ScrollBar.thumbHighlight");

@@ -15,6 +15,12 @@ import javax.swing.text.StyledDocument;
 import javax.swing.text.BadLocationException;
 import javax.swing.JOptionPane;
 
+/*
+## Class implements extended JFrame to show selected XML-File ##
+	- Uses JSrollPane -> no XML-file max size
+	- Constructor argument boolean darkMode sets Dark mode on/off
+*/
+
 public class FileJFrame extends JFrame {
 	private static final long serialVersionUID = 7526472295622776147L;
 	private JTextPane jTextPane;
